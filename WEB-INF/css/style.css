@@ -1,0 +1,153 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px; /* Imposta una larghezza massima per il contenitore */
+    width: 100%; /* Rende il contenitore responsive */
+}
+
+h2 {
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%; /* Rende gli input responsive */
+    box-sizing: border-box; /* Include il padding e il bordo nella larghezza */
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%; /* Rende il pulsante responsive */
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.risultati-ricerca {
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Stili specifici per "Login" */
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px; /* Imposta una larghezza massima per il contenitore */
+    width: 100%; /* Rende il contenitore responsive */
+}
+
+/* Stili specifici per "Prestito Libro" */
+.prestito-container {
+    /* Stili comuni con il container principale */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Stili specifici per "Inserimento Libro" */
+.insertbook-container {
+    /* Stili comuni con il container principale */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Stili specifici per "Inserimento Utente" */
+.insertuser-container {
+    /* Stili comuni con il container principale */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+/* Stili specifici per "Restituzione Libro" */
+.restituzione-container {
+    /* Aggiungi stili specifici se necessario */
+}
+
+.risposta-container {
+    /* Stili comuni con il container principale */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+/* Aggiungi altri stili specifici per pagine aggiuntive, se necessario */
+
+/* stili per tabelle */
+table {
+    border-collapse: collapse;
+    font-family: Tahoma, Geneva, sans-serif;
+}
+table td {
+    padding: 15px;
+}
+table thead td {
+    background-color: #54585d;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px solid #54585d;
+}
+table tbody td {
+    color: #636363;
+    border: 1px solid #dddfe1;
+}
+table tbody tr {
+    background-color: #f9fafb;
+}
+table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+/* ------------------------ */
