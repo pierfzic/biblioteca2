@@ -16,7 +16,7 @@ public class DummyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String contextPath = req.getContextPath();
-        resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/userpage.html");
+        resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/login/login.html");
     }
 
     @Override
