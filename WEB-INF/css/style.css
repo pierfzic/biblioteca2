@@ -50,6 +50,8 @@ button {
     cursor: pointer;
     font-size: 16px;
     width: 100%; /* Rende il pulsante responsive */
+    margin-right: 8px; /* Aggiunge un margine a destra di ogni pulsante */
+    white-space: nowrap; /* Impedisce ai pulsanti di andare a capo */
 }
 
 button:hover {
@@ -149,5 +151,11 @@ table tbody tr {
 }
 table tbody tr:nth-child(odd) {
     background-color: #ffffff;
+}
+.operation {
+    display: flex;  /* Utilizza flexbox per allineare i figli orizzontalmente */
+    flex-direction: row; /* Allinea i figli in una riga */
+    align-items: center; /* Centra i pulsanti verticalmente */
+    justify-content: flex-start; /* Allinea i pulsanti all'inizio del contenitore */
 }
 /* ------------------------ */

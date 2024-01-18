@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/menu-style.css">
+    <title>Pagina utente ##username##</title>
+</head>
+
+<body>
+<div class="sidebar">
+
+    <ul>
+        <li><a href="userpage.html">Home ##username##</a></li>
+        <li><a href="../login/login.html">Login</a></li>
+        <li><a href="restituzioneLibro.html">Situazione Prestiti</a></li>
+        <li><a href="ricerca.html">Ricerca Libro nel Catalogo</a></li>
+        <li><a href="../registration/registrazioneUtente.html">Registrazione nuovi utenti</a></li>
+        <li><a href="../insertbook/inserimentoLibro.html">Inserimento nuovo libro</a></li>
+        <li><a href="../login/entrance/logout">Logout</a></li>
+    </ul>
+</div>
+
+<div class="ricerca-catalogo-container">
+    <h2>Utente ##username##</h2>
+    <h2>Ricerca Libro nel Catalogo</h2>
+    <form action="/biblioteca/backend/cercalibro" method="get">
+        <label for="titolo">Titolo del Libro:</label>
+        <input type="text" id="titolo" name="titolo" >
+
+        <label for="autore">Autore del Libro:</label>
+        <input type="text" id="autore" name="autore" >
+
+        <button type="submit">Cerca Libro</button>
+    </form>
+
+    <div class="risultati-ricerca">
+        <!-- I risultati della ricerca saranno visualizzati qui -->
+        ##risultatiricerca##
+    </div>
+    <br>
+    <div  id="statusbar" >
+        ##statusmsg##
+    </div>
+</div>
+</body>
+
+</html>

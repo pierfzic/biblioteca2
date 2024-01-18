@@ -3,8 +3,6 @@ package org.biblioteca.servlets;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.sun.mail.smtp.SMTPAddressFailedException;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -12,20 +10,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.biblioteca.utils.ConfigLoader;
 import org.biblioteca.model.Libro;
 import org.biblioteca.model.Prestito;
 import org.biblioteca.model.Utente;
+import org.biblioteca.utils.ConfigLoader;
 import org.biblioteca.utils.CustomLogger;
-import org.biblioteca.utils.LocalDateAdapter;
 import org.h2.tools.Server;
 
 import javax.mail.*;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.annotation.WebServlet;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -36,11 +30,10 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import static org.biblioteca.Main.*;
-
-@WebServlet(name = "BibliotecaServlet", urlPatterns = {PATH_SERVICES_SERVLET+"/*"}, loadOnStartup = 1)
+import static org.biblioteca.Main.PATH_SERVICES_SERVLET;
+import static org.biblioteca.Main.PATH_WEBAPP_SERVLET;
+@javax.servlet.annotation.WebServlet(name = "BibliotecaServlet", urlPatterns = {PATH_SERVICES_SERVLET+"/*"}, loadOnStartup = 3)
 public class BibliotecaServlet extends HttpServlet {
-
     private Integer PORT_EMAIL ;
     private String PASSWORD_EMAIL ;
     private Integer GIORNI_PRESTITO;
@@ -57,9 +50,6 @@ public class BibliotecaServlet extends HttpServlet {
     private List<Utente> listaUtenti;
 
     private final CustomLogger logger = CustomLogger.getInstance();
-
-    public BibliotecaServlet() {
-    }
 
     @Override
     public void init() {
@@ -93,15 +83,14 @@ public class BibliotecaServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
         String contextPath = req.getContextPath();
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-        Integer disableAuth = Integer.parseInt(properties.getProperty("disable.auth"));
-        if (!disableAuth.equals(1)) {
+        if (false) {
             //check autenticazione
-            HttpSession session = req.getSession();
+
             String username = null;
             if (session != null && session.getAttribute("username") != null) {
                 // L'utente è loggato
@@ -117,6 +106,9 @@ public class BibliotecaServlet extends HttpServlet {
         String requestUri = req.getRequestURI();
         resp.setContentType("application/json");
         PrintWriter out = resp.getWriter();
+        if (requestUri.endsWith("/dummy")) {
+            out.println("");
+        }
 
         if (requestUri.endsWith("/listalibri")) {
             String jsonString = mapper.writeValueAsString(this.listaLibri);
@@ -143,10 +135,6 @@ public class BibliotecaServlet extends HttpServlet {
             Integer idLibro = Integer.parseInt(req.getParameter("libro"));
             Utente utente = this.listaUtenti.stream().filter(utente1 -> (utente1.getId().equals(idUtente))).toList().get(0);
             Libro libro = this.listaLibri.stream().filter(libro1 -> (libro1.getId().equals(idLibro))).toList().get(0);
-//            Gson gson = new GsonBuilder()
-//                    .excludeFieldsWithoutExposeAnnotation()
-//                    .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-//                    .create();
             Prestito prestito = prestito(utente, libro);
             if (prestito != null) {
                 String jsonString = null;
@@ -217,44 +205,6 @@ public class BibliotecaServlet extends HttpServlet {
         if (requestUri.endsWith("/notificascadenze")) {
             notificaUtenti();
         }
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String contextPath = req.getContextPath();
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        String requestUri = req.getRequestURI();
-        resp.setContentType("application/json");
-        PrintWriter out = resp.getWriter();
-        StringBuilder sb = new StringBuilder();
-        BufferedReader reader = req.getReader();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line);
-        }
-        String requestBody = sb.toString();
-
-        if (requestUri.endsWith("/ricevinotifica")) {
-            Prestito prestito = mapper.readValue(requestBody, Prestito.class);
-            boolean ok;
-            try {
-                ok = richiediNotifica(prestito);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            if (ok) {
-                String jsonString = mapper.writeValueAsString(ok);
-                resp.setStatus(HttpServletResponse.SC_OK);
-                resp.getWriter().println(jsonString);
-            } else {
-                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                resp.getWriter().println("");
-            }
-        }
-
-
     }
 
     private void inizializzaLista() throws SQLException {
@@ -298,15 +248,6 @@ public class BibliotecaServlet extends HttpServlet {
         logger.logInfo("SERVLET AVVIATA!");
     }
 
-    private void printListaLibri(PrintWriter out) {
-        out.println("<h3>Elenco Libri</h3>");
-        out.println("<ul>");
-        for (Libro l : this.listaLibri) {
-
-            out.println("<li> " + l.getId() + " - " + l.getAutore() + ", " + l.getTitolo() + ", " + l.getEditore() + " - " + l.getAnno() + "</li>");
-        }
-        out.println("</ul>");
-    }
 
     public List<Libro> ricercaLibro(String autore, String titolo) {
         if ((autore != null) && (titolo == null)) {
@@ -409,32 +350,20 @@ public class BibliotecaServlet extends HttpServlet {
         }
     }
 
-    public boolean addNotificaScadenza(Prestito prestito) {
-        return this.listaNotifichePrestiti.add(prestito);
-
-    }
-
     public List<Prestito> listaNotifichePerUtente(Integer userId) { //TODO: DA OTTIMIZZARE
         List<Prestito> scadenze=new ArrayList<>();
         for( Prestito prestito: this.listaPrestiti) {
- //           List<Prestito> scadenze = this.listaPrestiti.stream()
- //                   .filter(prestito -> //
+            //           List<Prestito> scadenze = this.listaPrestiti.stream()
+            //                   .filter(prestito -> //
             if                   (((prestito.getScadenza().minusDays(GIORNI_DA_NOTIFICA).isEqual(LocalDate.now())) || (prestito.getScadenza().minusDays(GIORNI_DA_NOTIFICA).isBefore(LocalDate.now())))
-                           &&  (prestito.getUser().getId().equals(userId))
-                                    && (prestito.isNotificare())
-                                    && (!prestito.isNotificato())
-                                    && (prestito.getRestituito() == null))
-                       scadenze.add(prestito);
- //                   .collect(Collectors.toList());
+                    &&  (prestito.getUser().getId().equals(userId))
+                    && (prestito.isNotificare())
+                    && (!prestito.isNotificato())
+                    && (prestito.getRestituito() == null))
+                scadenze.add(prestito);
+            //                   .collect(Collectors.toList());
         }
         return scadenze;
-//        for(Prestito p: scadenze) {
-//            Utente user=p.getUser();
-//            Libro libro=p.getLibro();
-//            LocalDate scadenza=p.getScadenza();
-//            user.addNotifica(libro,scadenza);
-//            this.listaNotifichePrestiti.remove(p);
-//        }
     }
 
     private boolean richiediNotifica(Prestito prestito) throws SQLException {
@@ -448,27 +377,11 @@ public class BibliotecaServlet extends HttpServlet {
         return true;
     }
 
-    public List<Prestito> getPrestitiUtente(Utente user) {
-        List<Prestito> prestitiUtente = this.listaPrestiti.stream()
-                .filter(prestito -> (prestito.getUser().equals(user)))
-                .collect(Collectors.toList());
-        return prestitiUtente;
-
-    }
-
     private void deletePrestiti() throws SQLException {
         Statement stmt = connDb.createStatement();
 
         stmt.executeUpdate("DELETE FROM PRESTITO");
         stmt.executeUpdate("UPDATE LIBRO SET DISPONIBILITA=1 WHERE ID=2");
-        stmt.close();
-
-    }
-
-    private void rinotifica() throws SQLException {
-        Statement stmt = connDb.createStatement();
-
-        stmt.executeUpdate("UPDATE PRESTITO SET NOTIFICATO=FALSE WHERE ID=4264");
         stmt.close();
 
     }
@@ -524,7 +437,7 @@ public class BibliotecaServlet extends HttpServlet {
     }
 
     private void sendEmail(String to, String from, String host, String subject, String text) {
-       logger.logInfo("Ho inviato mail di notifica scadenza a " + to);
+        logger.logInfo("Ho inviato mail di notifica scadenza a " + to);
         // Imposta le proprietà per la connessione SMTP
         Properties properties = System.getProperties();
         properties.setProperty("mail.smtp.host", host);
@@ -532,12 +445,12 @@ public class BibliotecaServlet extends HttpServlet {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         // Crea una sessione
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() { protected PasswordAuthentication getPasswordAuthentication() { return new PasswordAuthentication(FROM_EMAIL, PASSWORD_EMAIL); }
+        Session mailSession = Session.getInstance(properties, new javax.mail.Authenticator() { protected PasswordAuthentication getPasswordAuthentication() { return new PasswordAuthentication(FROM_EMAIL, PASSWORD_EMAIL); }
         });
 
         try {
             // Crea un oggetto MimeMessage predefinito
-            MimeMessage message = new MimeMessage(session);
+            MimeMessage message = new MimeMessage(mailSession);
 
             // Imposta i parametri dell'e-mail
             message.setFrom(new InternetAddress(from));
@@ -559,6 +472,7 @@ public class BibliotecaServlet extends HttpServlet {
             }
         } catch (MessagingException mex) {
             mex.printStackTrace();
+            logger.logSevere("Errore nell'invio della mail di notifica "+mex.getMessage());
         }
     }
 
@@ -566,14 +480,4 @@ public class BibliotecaServlet extends HttpServlet {
         return this.listaPrestiti.stream().filter(prestito -> (prestito.getUser().getId().equals(idUtente))).toList();
     }
 
-    @Override
-    public void destroy() {
-        super.destroy();
-        try {
-            this.connDb.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
-

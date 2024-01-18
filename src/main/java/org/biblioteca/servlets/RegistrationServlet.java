@@ -41,38 +41,40 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        inserisciNuovoUtente(request, response);
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        inserisciNuovoUtente(req, resp);
+    }
+
+    private void inserisciNuovoUtente(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String contextPath = request.getContextPath();
-         ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-        Integer disableAuth=Integer.parseInt(properties.getProperty("disable.auth"));
-        HttpSession session = null;
-        String username= null;
+        //check autenticazione
+        HttpSession session = request.getSession();
+        String username = null;
 
-        if (true) {
-            //check autenticazione
-            session = request.getSession();
-            username = null;
-
-            Integer idUser;
-            if (session!=null)
-                idUser=(Integer) session.getAttribute("iduser");
-            else {
-                idUser = 0;
-            }
-            Utente currUser=this.listaUtenti.stream().filter(utente -> (utente.getId().equals(idUser))).collect(Collectors.toList()).get(0);
-
-            if (session != null && currUser.getIsAdmin()) {
-                // L'utente è loggato ed è admin
-                username = (String) session.getAttribute("username");
-                // Gestisci la richiesta dell'utente autenticato
-            } else {
-                // L'utente non è loggato o non è admin, reindirizza al login
-                response.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/login/login.html");
-            }
+        Integer idUser;
+        if (session!=null)
+            idUser=(Integer) session.getAttribute("iduser");
+        else {
+            idUser = 0;
         }
-//        username = (String) session.getAttribute("username");
-//        String password = request.getParameter("password");
+        Utente currUser=this.listaUtenti.stream().filter(utente -> (utente.getId().equals(idUser))).collect(Collectors.toList()).get(0);
+
+        if (session != null && currUser.getIsAdmin()) {
+            // L'utente è loggato ed è admin
+            username = (String) session.getAttribute("username");
+            // Gestisci la richiesta dell'utente autenticato
+        } else {
+            // L'utente non è loggato o non è admin, reindirizza al login
+            response.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/login/login.html");
+        }
+
         String nuovousername= request.getParameter("username");
         String nuovapassword= request.getParameter("password");
         String stringIsAdmin=request.getParameter("isAdmin");
@@ -96,37 +98,6 @@ public class RegistrationServlet extends HttpServlet {
             response.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/registration/registrationsuccess.html");
         }
         else response.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/registration/registrationfailed.html");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String contextPath = req.getContextPath();
-        ServletContext context = getServletContext();
-        ObjectMapper mapper = new ObjectMapper();
-        String requestUri = req.getRequestURI();
-
-        resp.setContentType("application/json");
-        PrintWriter out = resp.getWriter();
-        StringBuilder sb = new StringBuilder();
-        BufferedReader reader = req.getReader();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line);
-        }
-        String requestBody = sb.toString();
-        Utente newuser = mapper.readValue(requestBody, Utente.class);
-        boolean ok;
-        try {
-            ok=newuser.persist(this.connDb);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        if (ok) {
-            this.listaUtenti.add(newuser);
-            resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/registration/registrationsuccess.html");
-        }
-        else resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/registration/registrationfailed.html");
-
     }
 
 }

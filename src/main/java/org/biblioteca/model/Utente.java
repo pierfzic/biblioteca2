@@ -5,30 +5,25 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
+import java.net.*;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.net.URLEncoder;
+import java.util.*;
 import java.nio.charset.StandardCharsets;
 
-import static org.biblioteca.Main.PATH_BACKEND_SERVLET;
-import static org.biblioteca.Main.PATH_SERVICES_SERVLET;
+import static org.biblioteca.Main.*;
 
 public class Utente {
     @JsonIgnore
-    private final String URL_SERVICES="http://localhost:8080/biblioteca"+PATH_SERVICES_SERVLET;
+    private  String sessionId;
     @JsonIgnore
-    private final String URL_BACKEND="http://localhost:8080/biblioteca"+PATH_BACKEND_SERVLET;
+    private final String URL_SERVICES="http://localhost:8080"+PATH_APP+PATH_SERVICES_SERVLET;
+    @JsonIgnore
+    private final String URL_BACKEND="http://localhost:8080"+PATH_APP+PATH_BACKEND_SERVLET;
 
     private Integer id;
 
@@ -40,15 +35,7 @@ public class Utente {
     @JsonIgnore
     private List<Prestito> listaPrestitiUtente;
 
-    public void setListaNotifiche(List<Notifica> listaNotifiche) {
-        this.listaNotifiche = listaNotifiche;
-    }
 
-    private List<Notifica> listaNotifiche;
-
-    public List<Notifica> getListaNotifiche() {
-        return listaNotifiche;
-    }
 
     public Integer getId() {
         return id;
@@ -61,7 +48,6 @@ public class Utente {
 
     public Utente() {
         listaPrestitiUtente =new ArrayList<>();
-        listaNotifiche=new ArrayList<>();
     }
 
     public Utente(Integer id, String username, String password) {
@@ -69,6 +55,14 @@ public class Utente {
         this.username = username;
         this.password = password;
         this.isAdmin=false;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public String getUsername() {
@@ -88,7 +82,6 @@ public class Utente {
     }
 
     public List<Prestito> getListaPrestitiUtente() throws IOException {
-        //searchListaPrestiti();
         return searchListaPrestiti();
     }
 
@@ -100,10 +93,6 @@ public class Utente {
         isAdmin = admin;
     }
 
-    public void setListaPrestitiUtente(List<Prestito> listaPrestitiUtente) {
-        this.listaPrestitiUtente = listaPrestitiUtente;
-    }
-
     public boolean prendiInPrestito(Libro libro) throws IOException {
         if (libro==null)
             return false;
@@ -111,7 +100,14 @@ public class Utente {
         mapper.registerModule(new JavaTimeModule());
         Integer idUtente=this.getId();
         Integer idLibro=libro.getId();
-        String response= sendGetRequest(URL_SERVICES+"/prestito?utente="+idUtente+"&libro="+idLibro);
+        String response= null;
+        try {
+            response = sendGetRequest(URL_SERVICES+"/prestito?utente="+idUtente+"&libro="+idLibro);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         //searchListaPrestiti();
         return !response.equals("");
 
@@ -119,7 +115,14 @@ public class Utente {
     public boolean restituisci(Integer idPrestito) throws IOException {
         ObjectMapper mapper=new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-        String response= sendGetRequest(URL_SERVICES+"/restituzione?prestito="+idPrestito);
+        String response= null;
+        try {
+            response = sendGetRequest(URL_SERVICES+"/restituzione?prestito="+idPrestito);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         Prestito p= mapper.readValue(response, Prestito.class);
         //searchListaPrestiti();
         return p != null;
@@ -133,7 +136,14 @@ public class Utente {
             autore="";
         String encodedTitolo = URLEncoder.encode(titolo, StandardCharsets.UTF_8.toString());
         String encodedAutore = URLEncoder.encode(autore, StandardCharsets.UTF_8.toString());
-        String response= sendGetRequest(URL_SERVICES+"/ricerca?autore="+encodedAutore+"&titolo="+encodedTitolo);
+        String response= null;
+        try {
+            response = sendGetRequest(URL_SERVICES+"/ricerca?autore="+encodedAutore+"&titolo="+encodedTitolo);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         List<Libro> result= Collections.emptyList();
         if (!response.equals(""))
             result = mapper.readValue(response, new TypeReference<List<Libro>>() {});
@@ -142,22 +152,26 @@ public class Utente {
 
     }
 
-    public List<Prestito> fetchListaNotifiche() throws IOException {
-        ObjectMapper mapper=new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        Integer userId=this.getId();
-        String response= sendGetRequest(URL_SERVICES+"/listanotifiche?utente="+userId);
-        List<Prestito> result = mapper.readValue(response, new TypeReference<List<Prestito>>(){});
-        return result;
-
-    }
     public List<Libro> listalibri() throws IOException {
         ObjectMapper mapper=new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-        String response= sendGetRequest(URL_SERVICES+"/listalibri");
+        String response= null;
+        try {
+            response = sendGetRequest(URL_SERVICES+"/listalibri");
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         List<Libro> result =  mapper.readValue(response, new TypeReference<List<Libro>>(){});
 
-        sendGetRequest(URL_SERVICES+"/listalibri");
+        try {
+            sendGetRequest(URL_SERVICES+"/listalibri");
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return result;
     }
     public boolean riceviNotificaScadenza(Prestito prestito) throws IOException {
@@ -181,33 +195,51 @@ public class Utente {
         mapper.registerModule(new JavaTimeModule());
         Integer idUtente=prestito.getUser().getId();
         Integer idLibro=prestito.getLibro().getId();
-        String response= sendGetRequest(URL_SERVICES+"/proroga?prestito="+prestito.getId());
+        String response= null;
+        try {
+            response = sendGetRequest(URL_SERVICES+"/proroga?prestito="+prestito.getId());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 //      Prestito p = mapper.readValue(response, Prestito.class);
         return !response.equals("");
     }
 
-    private String sendGetRequest(String uriServizio) throws IOException {
-        String urlString = uriServizio;
+    private String sendGetRequest(String urlString) throws IOException, URISyntaxException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder()
+                .cookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ALL))
+                .build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(urlString))
+                .header("Cookie", "JSESSIONID="+this.sessionId +".node0")
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        URL url = new URL(urlString);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-        String inputLine;
-        StringBuilder response = new StringBuilder();
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        } catch (java.io.FileNotFoundException e) {
-           response.append("");
-           return response.toString();
-        }
-        while ((inputLine = reader.readLine()) != null) {
-            response.append(inputLine);
-        }
-        reader.close();
-        connection.disconnect();
-        return response.toString();
+        Map<String, List<String>> headers = response.headers().map();
+        List<String> cookies = headers.get("set-cookie");
+        return response.body();
     }
+
+    private String sendPostRequest(String urlString, String bodyString) throws IOException, URISyntaxException, InterruptedException {
+        HttpClient client = HttpClient.newBuilder()
+                .cookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ALL))
+                .build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(urlString))
+                .header("Cookie", "JSESSIONID="+this.sessionId +".node0")
+                .POST(HttpRequest.BodyPublishers.ofString(bodyString))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        Map<String, List<String>> headers = response.headers().map();
+        List<String> cookies = headers.get("set-cookie");
+        return response.body();
+    }
+
+
 
 
     public String sendPostRequest2(String requestUrl, String jsonInputString) {
@@ -251,64 +283,7 @@ public class Utente {
         return resp;
     }
 
-    public static void sendPostRequest3(String requestUrl, String jsonInputString) {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(requestUrl))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonInputString))
-                .build();
 
-        try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    private String sendPutRequest(String requestUrl, String jsonInputString) throws IOException {
-        String resp="";
-        HttpURLConnection connection = null;
-
-        try {
-            URL url = new URL(requestUrl);
-            connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("PUT");
-            connection.setRequestProperty("Content-Type", "application/json; utf-8");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setDoOutput(true);
-
-            try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
-
-            int responseCode = connection.getResponseCode();
-
-            // Gestione delle risposte
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-                resp= response.toString();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-        return resp;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -321,8 +296,6 @@ public class Utente {
     public int hashCode() {
         return Objects.hash(username, password);
     }
-
-
 
     public boolean persist(Connection conn) throws SQLException {
         PreparedStatement pStatement = conn.prepareStatement("INSERT INTO UTENTE(USERNAME, PASSWORD, IS_ADMIN) VALUES (?, ?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -344,7 +317,7 @@ public class Utente {
     }
 
     public boolean update(Connection conn) throws SQLException {
-            PreparedStatement pStatement = conn.prepareStatement("UPDATE UTENTE SET USERNAME=?, PASSWORD=? WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pStatement = conn.prepareStatement("UPDATE UTENTE SET USERNAME=?, PASSWORD=? WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
         pStatement.setString(1,this.getUsername());
         pStatement.setString(2,hashMD5(this.getPassword()));
         pStatement.setInt(3, this.id);
@@ -374,7 +347,14 @@ public class Utente {
         ObjectMapper mapper=new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         Integer idUtente=this.getId();
-        String response= sendGetRequest(URL_SERVICES+"/listaprestitiutente?utente="+idUtente);
+        String response= null;
+        try {
+            response = sendGetRequest(URL_SERVICES+"/listaprestitiutente?utente="+idUtente);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         List<Prestito> result = mapper.readValue(response, new TypeReference<List<Prestito>>(){});
         return result;
     }

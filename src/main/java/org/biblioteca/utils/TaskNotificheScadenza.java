@@ -7,10 +7,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.TimerTask;
 
+import static org.biblioteca.Main.PATH_APP;
 import static org.biblioteca.Main.PATH_SERVICES_SERVLET;
 
 public class TaskNotificheScadenza extends TimerTask {
-    private final String URL_SERVICES="http://localhost:8080/biblioteca"+PATH_SERVICES_SERVLET;
+    private final String URL_SERVICES="http://localhost:8080"+PATH_APP+PATH_SERVICES_SERVLET;
     @Override
     public void run() {
         String url=URL_SERVICES+"/notificascadenze";
