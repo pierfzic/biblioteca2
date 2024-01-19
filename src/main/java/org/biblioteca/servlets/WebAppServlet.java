@@ -42,6 +42,7 @@ public class WebAppServlet extends HttpServlet {
         String hideloginmenu= (String) session.getAttribute("hideloginmenu");
         List<Libro> searchResults= (List<Libro>) session.getAttribute("searchResults");
         List<Libro> books= (List<Libro>) context.getAttribute("books");
+        List<Utente> users= (List<Utente>) context.getAttribute("users");
         String username="";
         if (this.currentUser!=null) {
             username = this.currentUser.getUsername();
@@ -81,10 +82,12 @@ public class WebAppServlet extends HttpServlet {
             mapParameters.put("##listalibri##", genTableListResult(books,contextPath, PATH_BACKEND_SERVLET));
             mapParameters.put("##statusmsg##", (statusMsg!=null)? statusMsg: "" );
             mapParameters.put("##hideloginmenu##", (hideloginmenu!=null)? hideloginmenu: "" );
+            mapParameters.put("##listautenti##", genTableUserResult(users,contextPath, PATH_BACKEND_SERVLET));
             if (currentUser!=null) {
                 List<Prestito> prestitiInSospesoUtente = currentUser.getListaPrestitiUtente().stream().filter(prestito -> (prestito.getRestituito() == null)).toList();
                 mapParameters.put("##borrowedbooks##", (prestitiInSospesoUtente != null)?genTableLoanResult(prestitiInSospesoUtente,contextPath, PATH_BACKEND_SERVLET):"");
                 mapParameters.put("##statusloanmsg##", (statusLoanMsg != null) ? statusLoanMsg : "");
+                mapParameters.put("##onlyforadmin##", this.currentUser.getIsAdmin()? " style=\"display: block;\"": "style=\"display: none;\"");
             }
         }
 
@@ -145,6 +148,33 @@ public class WebAppServlet extends HttpServlet {
             html.append("<td>").append("<div class='operation'>").append("<button onclick=\"window.location.href='")
                     .append(contextPath).append(servletContextPath).append("/chiediprestito?libro=").append(libro.getId())
                     .append("';\">Chiedi Prestito</a>").append("</div>").append("</td>");
+            html.append("</tr>\n");
+        }
+        html.append("</table>");
+        return html.toString();
+
+    }
+
+    private String genTableUserResult(List<Utente> results, String contextPath, String servletContextPath) throws IOException {
+        if (results==null)
+            return "";
+        if (results.size()==0)
+            return "<h3>Nessun Utente</h3>";
+        StringBuilder html = new StringBuilder();
+        html.append("<table>\n");
+        html.append("<tr><th>Id</th><th>Username</th><th>Amministratore</th><th>N. Libri in prestito</th><th>Operazione</th></tr>\n");
+
+        if (results==null)
+            return "";
+        for (Utente utente : results) {
+            html.append("<tr>");
+            html.append("<td>").append(utente.getId()).append("</td>");
+            html.append("<td>").append(utente.getUsername()).append("</td>");
+            html.append("<td>").append(utente.getIsAdmin()).append("</td>");
+            html.append("<td>").append(utente.getListaPrestitiUtente().size()).append("</td>");
+            html.append("<td>").append("<div class='operation'>").append("<button class='deletebutton' onclick=\"window.location.href='")
+                    .append(contextPath).append(servletContextPath).append("/eliminaUtente?utente=").append(utente.getId())
+                    .append("'\">Elimina</button>").append("</td>");
             html.append("</tr>\n");
         }
         html.append("</table>");

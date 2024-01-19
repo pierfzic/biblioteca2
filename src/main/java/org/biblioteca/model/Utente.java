@@ -304,10 +304,8 @@ public class Utente {
     }
 
     public boolean delete(Connection conn) throws SQLException {
-        PreparedStatement pStatement = conn.prepareStatement("UPDATE UTENTE SET USERNAME=?, PASSWORD=? WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
-        pStatement.setString(1,this.getUsername());
-        pStatement.setString(2,hashMD5(this.getPassword()));
-        pStatement.setInt(3, this.id);
+        PreparedStatement pStatement = conn.prepareStatement("DELETE FROM UTENTE  WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
+        pStatement.setInt(1,this.getId());
         int affectedRows = pStatement.executeUpdate();
         pStatement.close();
         return affectedRows != 0;

@@ -116,6 +116,11 @@ public class BibliotecaServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_OK);
             resp.getWriter().println(jsonString);
         }
+        if (requestUri.endsWith("/listautenti")) {
+            String jsonString = mapper.writeValueAsString(this.listaUtenti);
+            resp.setStatus(HttpServletResponse.SC_OK);
+            resp.getWriter().println(jsonString);
+        }
         if (requestUri.endsWith("/ricerca")) {
             String srcAutore = req.getParameter("autore");
             String srcTitolo = req.getParameter("titolo");
@@ -159,6 +164,20 @@ public class BibliotecaServlet extends HttpServlet {
             boolean ok=this.listaLibri.remove(libro);
             try {
                 libro.delete(connDb);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if (ok)
+                resp.getWriter().println("");
+            else resp.getWriter().println("false");
+        }
+
+        if (requestUri.endsWith("/eliminaUtente")) {
+            Integer idUtente = Integer.parseInt(req.getParameter("utente"));
+            Utente daEliminare=this.listaUtenti.stream().filter(utente -> utente.getId().equals(idUtente)).toList().get(0);
+            boolean ok=this.listaUtenti.remove(daEliminare);
+            try {
+                daEliminare.delete(connDb);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -435,6 +454,16 @@ public class BibliotecaServlet extends HttpServlet {
         prestitoDaNotificare.update(connDb);
         logger.logInfo("Richiesta notifica per prestito id="+prestito.getId()+" da utente "+prestito.getUser().getUsername());
         return true;
+    }
+
+    private boolean eliminaUtente(Integer idUtente) {
+        Utente daEliminare=this.listaUtenti.stream().filter(utente -> utente.getId().equals(idUtente)).toList().get(0);
+        boolean ok=this.listaUtenti.remove(daEliminare);
+        try {
+            return daEliminare.delete(connDb);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Prestito> getPrestitiUtente(Utente user) {

@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,6 +65,13 @@ public class BackEndServlet  extends HttpServlet {
             List<Libro> listalibri=currentUser.listalibri();
             session.setAttribute("listalibri",listalibri);
             resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaLibri.html");
+        }
+        if (requestUri.endsWith("/listautenti")) {
+            if (currentUser.getIsAdmin()) {
+                List<Utente> listautenti = (List<Utente>) context.getAttribute("users");
+                session.setAttribute("listautenti", listautenti);
+                resp.sendRedirect(contextPath + PATH_WEBAPP_SERVLET + "/menu/listaUtenti.html");
+            }
         }
         if (requestUri.endsWith("/cercalibro")) {
             String srcAutore=req.getParameter("autore");
@@ -129,6 +137,20 @@ public class BackEndServlet  extends HttpServlet {
             boolean ok=currentUser.cancellaLibro(daCancellare);
             session.setAttribute("statusMsg", ok? "Hai cancellato: " + daCancellare.getAutore() + " -" + daCancellare.getTitolo() :"");
             resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaLibri.html");
+        }
+        if (requestUri.endsWith("/eliminaUtente")) {
+            Integer idUtente = Integer.parseInt(req.getParameter("utente"));
+            Utente daCancellare=this.listaUtenti.stream().filter(utente -> utente.getId().equals(idUtente)).toList().get(0);
+            String deletedUsername=daCancellare.getUsername();
+            this.listaUtenti.remove(daCancellare);
+            boolean ok= false;
+            try {
+                ok = daCancellare.delete(connDb);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            session.setAttribute("statusMsg", ok? "Hai cancellato l'utente : ID=" + daCancellare.getId()+ " - " + daCancellare.getUsername() :"");
+            resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaUtenti.html");
         }
     }
 
