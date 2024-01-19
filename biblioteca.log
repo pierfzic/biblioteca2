@@ -137,3 +137,106 @@
 2024-01-18T21:59:13.767051900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7080
 2024-01-18T21:59:13.767051900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7112
 2024-01-18T21:59:13.768077200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-19T12:47:54.732912500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-19T12:47:54.959785600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-19T12:47:54.983436600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente admin E' AMMINISTRATORE
+2024-01-19T12:47:54.985383300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente piero779@gmail.com UTENTE NORMALE
+2024-01-19T12:47:54.986600300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente pasquale UTENTE NORMALE
+2024-01-19T12:47:54.987459600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente rrrr UTENTE NORMALE
+2024-01-19T12:47:54.988809600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente bbbbbbb E' AMMINISTRATORE
+2024-01-19T12:47:54.989465300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente aldopalazzeschi E' AMMINISTRATORE
+2024-01-19T12:47:54.990989600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente giorgiopelletta UTENTE NORMALE
+2024-01-19T12:47:54.992054400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente temu UTENTE NORMALE
+2024-01-19T12:47:54.993560600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente rrrrrrrrrytyty E' AMMINISTRATORE
+2024-01-19T12:47:54.994067100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-19T12:47:55.002316800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Io, Robot
+2024-01-19T12:47:55.002843400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il nome della Rosa
+2024-01-19T12:47:55.003482900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il linguaggio C
+2024-01-19T12:47:55.003989500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il libro di Fisica
+2024-01-19T12:47:55.004044900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Tre uomini in barca
+2024-01-19T12:47:55.004700300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il grande Gatsby
+2024-01-19T12:47:55.005236700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Le mille e una notte
+2024-01-19T12:47:55.005837500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro ddvsdvsdv
+2024-01-19T12:47:55.006493800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro sdfsdfsdf
+2024-01-19T12:47:55.006493800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il Libro di Chimica
+2024-01-19T12:47:55.007022400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro tttttttttttttt
+2024-01-19T12:47:55.007629400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-19T12:47:55.015995+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6888
+2024-01-19T12:47:55.016995500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6920
+2024-01-19T12:47:55.016995500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6952
+2024-01-19T12:47:55.016995500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6984
+2024-01-19T12:47:55.017995300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7016
+2024-01-19T12:47:55.017995300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7048
+2024-01-19T12:47:55.017995300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7080
+2024-01-19T12:47:55.018994800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7112
+2024-01-19T12:47:55.018994800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7176
+2024-01-19T12:47:55.018994800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-19T12:51:19.209614400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-19T12:52:05.762552700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-19T12:52:05.917574100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-19T12:52:05.930141600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente admin E' AMMINISTRATORE
+2024-01-19T12:52:05.931141300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente piero779@gmail.com UTENTE NORMALE
+2024-01-19T12:52:05.931141300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente pasquale UTENTE NORMALE
+2024-01-19T12:52:05.932141100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente rrrr UTENTE NORMALE
+2024-01-19T12:52:05.933142900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente bbbbbbb E' AMMINISTRATORE
+2024-01-19T12:52:05.933142900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente aldopalazzeschi E' AMMINISTRATORE
+2024-01-19T12:52:05.934142100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente giorgiopelletta UTENTE NORMALE
+2024-01-19T12:52:05.935140800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente temu UTENTE NORMALE
+2024-01-19T12:52:05.936141900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente rrrrrrrrrytyty E' AMMINISTRATORE
+2024-01-19T12:52:05.936141900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-19T12:52:05.941140300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Io, Robot
+2024-01-19T12:52:05.942139900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il nome della Rosa
+2024-01-19T12:52:05.942139900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il linguaggio C
+2024-01-19T12:52:05.943140800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il libro di Fisica
+2024-01-19T12:52:05.944142900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Tre uomini in barca
+2024-01-19T12:52:05.944142900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il grande Gatsby
+2024-01-19T12:52:05.945141500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Le mille e una notte
+2024-01-19T12:52:05.946142+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro ddvsdvsdv
+2024-01-19T12:52:05.946142+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro sdfsdfsdf
+2024-01-19T12:52:05.947141900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il Libro di Chimica
+2024-01-19T12:52:05.948141500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro tttttttttttttt
+2024-01-19T12:52:05.948141500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-19T12:52:05.957141600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6888
+2024-01-19T12:52:05.958142700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6920
+2024-01-19T12:52:05.959141800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6952
+2024-01-19T12:52:05.960141600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6984
+2024-01-19T12:52:05.961143100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7016
+2024-01-19T12:52:05.961143100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7048
+2024-01-19T12:52:05.962141700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7080
+2024-01-19T12:52:05.963142600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7112
+2024-01-19T12:52:05.964141900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7176
+2024-01-19T12:52:05.964141900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-19T12:52:31.548226400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-19T12:52:31.722905500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-19T12:52:31.734903700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente admin E' AMMINISTRATORE
+2024-01-19T12:52:31.735908300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente piero779@gmail.com UTENTE NORMALE
+2024-01-19T12:52:31.735908300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente pasquale UTENTE NORMALE
+2024-01-19T12:52:31.736904300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente rrrr UTENTE NORMALE
+2024-01-19T12:52:31.737904300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente bbbbbbb E' AMMINISTRATORE
+2024-01-19T12:52:31.737904300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente aldopalazzeschi E' AMMINISTRATORE
+2024-01-19T12:52:31.738904+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente giorgiopelletta UTENTE NORMALE
+2024-01-19T12:52:31.738904+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente temu UTENTE NORMALE
+2024-01-19T12:52:31.739904200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo utente rrrrrrrrrytyty E' AMMINISTRATORE
+2024-01-19T12:52:31.739904200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-19T12:52:31.743902200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Io, Robot
+2024-01-19T12:52:31.744901500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il nome della Rosa
+2024-01-19T12:52:31.745920900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il linguaggio C
+2024-01-19T12:52:31.745920900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il libro di Fisica
+2024-01-19T12:52:31.746902500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Tre uomini in barca
+2024-01-19T12:52:31.746902500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il grande Gatsby
+2024-01-19T12:52:31.747901200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Le mille e una notte
+2024-01-19T12:52:31.747901200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro ddvsdvsdv
+2024-01-19T12:52:31.748904800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro sdfsdfsdf
+2024-01-19T12:52:31.749906900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro Il Libro di Chimica
+2024-01-19T12:52:31.749906900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo nella biblioteca il libro tttttttttttttt
+2024-01-19T12:52:31.750908200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-19T12:52:31.757902300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6888
+2024-01-19T12:52:31.757902300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6920
+2024-01-19T12:52:31.758901900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6952
+2024-01-19T12:52:31.759905900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 6984
+2024-01-19T12:52:31.760920700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7016
+2024-01-19T12:52:31.761904100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7048
+2024-01-19T12:52:31.762901900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7080
+2024-01-19T12:52:31.762901900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7112
+2024-01-19T12:52:31.763904500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Aggiungo prestito 7176
+2024-01-19T12:52:31.763904500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!

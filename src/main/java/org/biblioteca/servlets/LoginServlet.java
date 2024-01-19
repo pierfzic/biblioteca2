@@ -113,22 +113,6 @@ public class LoginServlet extends HttpServlet {
         return response.body();
     }
 
-    private String sendPostRequest(String urlString, String body) throws IOException, URISyntaxException, InterruptedException {
-        HttpClient client = HttpClient.newBuilder()
-                .cookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ALL))
-                .build();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI(urlString))
-                //.header("Cookie", "JSESSIONID="+this.currentSessionid +".node0")
-                .POST(HttpRequest.BodyPublishers.ofString(body))
-                .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        Map<String, List<String>> headers = response.headers().map();
-        List<String> cookies = headers.get("set-cookie");
-        return response.body();
-    }
-
     private void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         String contextPath = request.getContextPath();
@@ -146,7 +130,8 @@ public class LoginServlet extends HttpServlet {
             currentUser.setSessionId("");
             currentUser=null;
             this.currentSessionid="";
-            return;
+            session.setAttribute("hideloginmenu"," ");
+            response.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/login/login.html");
         }
 
         if (request.getParameter("username")==null) {
@@ -196,6 +181,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("iduser", idUser);
             session.setAttribute("currentUser", currentUser);
             Utente utentecorrente= (Utente) session.getAttribute("currentUser");
+            session.setAttribute("hideloginmenu","style=\"display: none;\"");
             //  timeout
             session.setMaxInactiveInterval(30 * 60);
             // user page

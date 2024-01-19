@@ -54,7 +54,7 @@ public class Main {
 
         // Esegue il task ogni 24 ore
         Integer ogniGiorno=86400000;//24*60*60*1000;
-        timer.schedule(task, 20000, ogniGiorno);
+        timer.schedule(task, 200000, ogniGiorno);
 
 
    }

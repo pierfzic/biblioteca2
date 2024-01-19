@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -62,7 +63,7 @@ public class BackEndServlet  extends HttpServlet {
         if (requestUri.endsWith("/listalibri")) {
             List<Libro> listalibri=currentUser.listalibri();
             session.setAttribute("listalibri",listalibri);
-            resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/userpage.html");
+            resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaLibri.html");
         }
         if (requestUri.endsWith("/cercalibro")) {
             String srcAutore=req.getParameter("autore");
@@ -98,7 +99,14 @@ public class BackEndServlet  extends HttpServlet {
             Prestito daNotificare=this.listaPrestiti.stream().filter(prestito1 -> (prestito1.getId().equals(idPrestito))).toList().get(0);
             if (daNotificare.getUser().equals(currentUser) &&
                     (daNotificare.getRestituito()==null) ) { //può essere notificato
-                boolean oknotifica=currentUser.riceviNotificaScadenza(daNotificare);
+                boolean oknotifica= false;
+                try {
+                    oknotifica = currentUser.riceviNotificaScadenza(daNotificare);
+                } catch (URISyntaxException e) {
+                    throw new RuntimeException(e);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 if (oknotifica) {
                     session.setAttribute("statusLoanMsg", "Hai chiesto la notifica per la scadenza del prestito di " + daNotificare.getLibro().getAutore() + " - " + daNotificare.getLibro().getTitolo());
                     resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/restituzionelibro.html");
@@ -113,6 +121,14 @@ public class BackEndServlet  extends HttpServlet {
             boolean ok = currentUser.prolungaPrestito(prestito);
             session.setAttribute("statusLoanMsg", ok? "Hai prorogato: " + libro.getAutore() + " -" + libro.getTitolo() :"");
             resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/restituzionelibro.html");
+        }
+
+        if (requestUri.endsWith("/cancellalibro")) {
+            Integer idLibro = Integer.parseInt(req.getParameter("libro"));
+            Libro daCancellare=this.listaLibri.stream().filter(libro -> libro.getId().equals(idLibro)).toList().get(0);
+            boolean ok=currentUser.cancellaLibro(daCancellare);
+            session.setAttribute("statusMsg", ok? "Hai cancellato: " + daCancellare.getAutore() + " -" + daCancellare.getTitolo() :"");
+            resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaLibri.html");
         }
     }
 

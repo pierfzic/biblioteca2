@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu-style.css">
-    <title>Pagina utente ##username##</title>
+    <title>Ricerca Libro nel Catalogo</title>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
     <ul>
         <li><a href="userpage.html">Home ##username##</a></li>
         <div ##hideloginmenu##>
-        <li><a href="../login/login.html">Login</a></li>
+            <li><a href="../login/login.html">Login</a></li>
         </div>
         <li><a href="listaLibri.html">Lista Libri</a></li>
         <li><a href="restituzioneLibro.html">Situazione Prestiti</a></li>
@@ -26,28 +26,18 @@
     </ul>
 </div>
 
-<div class="ricerca-catalogo-container">
-    <h2>Utente ##username##</h2>
-    <h2>Ricerca Libro nel Catalogo</h2>
-    <form action="/biblioteca/backend/cercalibro" method="get">
-        <label for="titolo">Titolo del Libro:</label>
-        <input type="text" id="titolo" name="titolo" >
+    <div class="lista-libri-container">
+        <h2>Lista Libri in Biblioteca</h2>
+        <div class="risultati-ricerca">
+            ##listalibri##
+        </div>
+        <br>
+        <div  id="statusbar" >
+            ##statusmsg##
+        </div>
 
-        <label for="autore">Autore del Libro:</label>
-        <input type="text" id="autore" name="autore" >
-
-        <button type="submit">Cerca Libro</button>
-    </form>
-
-    <div class="risultati-ricerca">
-        <!-- I risultati della ricerca saranno visualizzati qui -->
-        ##risultatiricerca##
     </div>
-    <br>
-    <div  id="statusbar" >
-        ##statusmsg##
-    </div>
-</div>
+
 </body>
 
 </html>

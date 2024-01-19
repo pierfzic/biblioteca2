@@ -54,6 +54,11 @@ button {
     white-space: nowrap; /* Impedisce ai pulsanti di andare a capo */
 }
 
+.deletebutton {
+    background-color: #EE4B2B;
+
+}
+
 button:hover {
     background-color: #0056b3;
 }

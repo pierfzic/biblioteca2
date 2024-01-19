@@ -121,4 +121,12 @@ public class Libro {
     public int hashCode() {
         return Objects.hash(id, autore, titolo, editore, anno);
     }
+
+    public boolean delete(Connection conn) throws SQLException {
+        PreparedStatement pStatement = conn.prepareStatement("DELETE FROM LIBRO  WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
+        pStatement.setInt(1, this.id);
+        int affectedRows = pStatement.executeUpdate();
+        pStatement.close();
+        return affectedRows != 0;
+    }
 }

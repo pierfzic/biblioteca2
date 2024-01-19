@@ -20,6 +20,7 @@ import org.h2.tools.Server;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -151,6 +152,20 @@ public class BibliotecaServlet extends HttpServlet {
                 resp.getWriter().println("");
             }
         }
+
+        if (requestUri.endsWith("/cancellalibro")) {
+            Integer idLibro = Integer.parseInt(req.getParameter("libro"));
+            Libro libro = this.listaLibri.stream().filter(libro1 -> (libro1.getId().equals(idLibro))).toList().get(0);
+            boolean ok=this.listaLibri.remove(libro);
+            try {
+                libro.delete(connDb);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if (ok)
+                resp.getWriter().println("");
+            else resp.getWriter().println("false");
+        }
         if (requestUri.endsWith("/restituzione")) {
             Integer idPrestito = Integer.parseInt(req.getParameter("prestito"));
             Prestito prestito = restituisci(idPrestito);
@@ -205,6 +220,44 @@ public class BibliotecaServlet extends HttpServlet {
         if (requestUri.endsWith("/notificascadenze")) {
             notificaUtenti();
         }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String contextPath = req.getContextPath();
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        String requestUri = req.getRequestURI();
+        resp.setContentType("application/json");
+        PrintWriter out = resp.getWriter();
+        StringBuilder sb = new StringBuilder();
+        BufferedReader reader = req.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+        String requestBody = sb.toString();
+
+        if (requestUri.endsWith("/ricevinotifica")) {
+            Prestito prestito = mapper.readValue(requestBody, Prestito.class);
+            boolean ok;
+            try {
+                ok = richiediNotifica(prestito);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if (ok) {
+                String jsonString = mapper.writeValueAsString(ok);
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().println(jsonString);
+            } else {
+                resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                resp.getWriter().println("");
+            }
+        }
+
+
     }
 
     private void inizializzaLista() throws SQLException {
@@ -364,6 +417,13 @@ public class BibliotecaServlet extends HttpServlet {
             //                   .collect(Collectors.toList());
         }
         return scadenze;
+//        for(Prestito p: scadenze) {
+//            Utente user=p.getUser();
+//            Libro libro=p.getLibro();
+//            LocalDate scadenza=p.getScadenza();
+//            user.addNotifica(libro,scadenza);
+//            this.listaNotifichePrestiti.remove(p);
+//        }
     }
 
     private boolean richiediNotifica(Prestito prestito) throws SQLException {
@@ -375,6 +435,14 @@ public class BibliotecaServlet extends HttpServlet {
         prestitoDaNotificare.update(connDb);
         logger.logInfo("Richiesta notifica per prestito id="+prestito.getId()+" da utente "+prestito.getUser().getUsername());
         return true;
+    }
+
+    public List<Prestito> getPrestitiUtente(Utente user) {
+        List<Prestito> prestitiUtente = this.listaPrestiti.stream()
+                .filter(prestito -> (prestito.getUser().equals(user)))
+                .collect(Collectors.toList());
+        return prestitiUtente;
+
     }
 
     private void deletePrestiti() throws SQLException {

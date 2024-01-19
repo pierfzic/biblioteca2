@@ -174,13 +174,13 @@ public class Utente {
         }
         return result;
     }
-    public boolean riceviNotificaScadenza(Prestito prestito) throws IOException {
+    public boolean riceviNotificaScadenza(Prestito prestito) throws IOException, URISyntaxException, InterruptedException {
         if (prestito==null)
             return false;
         ObjectMapper mapper=new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
         String body=mapper.writeValueAsString(prestito);
-        String response= sendPostRequest2(URL_SERVICES+"/ricevinotifica", body);
+        String response= sendPostRequest(URL_SERVICES+"/ricevinotifica", body);
         if (response==null)
             return false;
         boolean ok=mapper.readValue(response, Boolean.class);
@@ -207,6 +207,27 @@ public class Utente {
         return !response.equals("");
     }
 
+    public boolean cancellaLibro(Libro daCancellare) {
+        if (daCancellare == null)
+            return false;
+        String response;
+
+        if (this.getIsAdmin()) {
+            try {
+                response = sendGetRequest(URL_SERVICES + "/cancellalibro?libro=" + daCancellare.getId());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            } catch (URISyntaxException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            return !response.equals("");
+        }
+        else return false;
+
+    }
+
     private String sendGetRequest(String urlString) throws IOException, URISyntaxException, InterruptedException {
         HttpClient client = HttpClient.newBuilder()
                 .cookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_ALL))
@@ -229,6 +250,8 @@ public class Utente {
                 .build();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(urlString))
+                .header("Content-Type", "application/json; utf-8")
+                .header("Accept", "application/json")
                 .header("Cookie", "JSESSIONID="+this.sessionId +".node0")
                 .POST(HttpRequest.BodyPublishers.ofString(bodyString))
                 .build();
@@ -238,52 +261,6 @@ public class Utente {
         List<String> cookies = headers.get("set-cookie");
         return response.body();
     }
-
-
-
-
-    public String sendPostRequest2(String requestUrl, String jsonInputString) {
-        String resp="";
-        HttpURLConnection connection = null;
-
-        try {
-            URL url = new URL(requestUrl);
-            connection = (HttpURLConnection) url.openConnection();
-
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json; utf-8");
-            connection.setRequestProperty("Accept", "application/json");
-            connection.setDoOutput(true);
-
-            try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
-                os.write(input, 0, input.length);
-            }
-
-            int responseCode = connection.getResponseCode();
-
-            // Gestione delle risposte
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-                StringBuilder response = new StringBuilder();
-                String responseLine;
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-                resp= response.toString();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (connection != null) {
-                connection.disconnect();
-            }
-        }
-        return resp;
-    }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -326,6 +303,16 @@ public class Utente {
         return affectedRows != 0;
     }
 
+    public boolean delete(Connection conn) throws SQLException {
+        PreparedStatement pStatement = conn.prepareStatement("UPDATE UTENTE SET USERNAME=?, PASSWORD=? WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
+        pStatement.setString(1,this.getUsername());
+        pStatement.setString(2,hashMD5(this.getPassword()));
+        pStatement.setInt(3, this.id);
+        int affectedRows = pStatement.executeUpdate();
+        pStatement.close();
+        return affectedRows != 0;
+    }
+
     private String hashMD5(String password) {
         if (password==null)
             return "";
@@ -358,4 +345,6 @@ public class Utente {
         List<Prestito> result = mapper.readValue(response, new TypeReference<List<Prestito>>(){});
         return result;
     }
+
+
 }

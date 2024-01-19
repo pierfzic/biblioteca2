@@ -39,6 +39,7 @@ public class WebAppServlet extends HttpServlet {
         this.currentUser= (Utente) session.getAttribute("currentUser");
         String statusMsg= (String) session.getAttribute("statusMsg");
         String statusLoanMsg= (String) session.getAttribute("statusLoanMsg");
+        String hideloginmenu= (String) session.getAttribute("hideloginmenu");
         List<Libro> searchResults= (List<Libro>) session.getAttribute("searchResults");
         List<Libro> books= (List<Libro>) context.getAttribute("books");
         String username="";
@@ -46,13 +47,18 @@ public class WebAppServlet extends HttpServlet {
             username = this.currentUser.getUsername();
         }
         String uri = request.getRequestURI();
+        String path = uri.substring(contextPath.length());
+        // Estrae la parte finale dell'URI per ottenere il nome della pagina
+        String pagina = path.substring(path.lastIndexOf('/') + 1);
+        String estensione = pagina.substring(pagina.lastIndexOf('.') + 1);
         StringBuffer sb=new StringBuffer();
         // Ottieni il writer della risposta
         PrintWriter out = response.getWriter();
 
                 //check autenticazione
             username = null;
-        boolean firstLogin = session.getAttribute("firstLogin") != null;
+        //boolean firstLogin = session.getAttribute("firstLogin") != null;
+        boolean firstLogin = estensione.equals("css");
         if ((session != null && session.getAttribute("username") != null) ||firstLogin ) {
                 // L'utente è loggato
                  username = (String) session.getAttribute("username");
@@ -62,21 +68,23 @@ public class WebAppServlet extends HttpServlet {
                 // L'utente non è loggato, reindirizza al login
                 response.sendRedirect("/biblioteca/web/login.html");
             }
-
+        // per evitare che tornando indietro risulti loggato
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        response.setDateHeader("Expires", 0); // Proxies.
+        // -------------------
         Map<String, String> mapParameters=new HashMap<>(); //mappa delle variabili template da sostituire
         mapParameters.put("##username##",username);
         mapParameters.put("##risultatiricerca##",genTableSearchResult(searchResults, contextPath, PATH_BACKEND_SERVLET));
-        mapParameters.put("##listalibri##", genTableSearchResult(books,contextPath, PATH_BACKEND_SERVLET));
+        mapParameters.put("##listalibri##", genTableListResult(books,contextPath, PATH_BACKEND_SERVLET));
         mapParameters.put("##statusmsg##", (statusMsg!=null)? statusMsg: "" );
+        mapParameters.put("##hideloginmenu##", (hideloginmenu!=null)? hideloginmenu: "" );
         if (currentUser!=null) {
             List<Prestito> prestitiInSospesoUtente = currentUser.getListaPrestitiUtente().stream().filter(prestito -> (prestito.getRestituito() == null)).toList();
             mapParameters.put("##borrowedbooks##", (prestitiInSospesoUtente != null)?genTableLoanResult(prestitiInSospesoUtente,contextPath, PATH_BACKEND_SERVLET):"");
             mapParameters.put("##statusloanmsg##", (statusLoanMsg != null) ? statusLoanMsg : "");
         }
-        String path = uri.substring(contextPath.length());
-        // Estrae la parte finale dell'URI per ottenere il nome della pagina
-        String pagina = path.substring(path.lastIndexOf('/') + 1);
-        String estensione = pagina.substring(pagina.lastIndexOf('.') + 1);
+
         response.setContentType("text/"+estensione+";charset=UTF-8");
             // Leggi e restituisci il file HTML
             try (BufferedReader reader = new BufferedReader(new FileReader("."+path))) {
@@ -97,6 +105,7 @@ public class WebAppServlet extends HttpServlet {
         session.setAttribute("searchResults",null);
         session.setAttribute("statusMsg",null);
         session.setAttribute("statusLoanMsg",null);
+        //session.setAttribute("hideloginmenu", null);
         out.println(filteredPage);
 }
     public  String replaceStrings(String template, Map<String, String> replacements) {
@@ -117,7 +126,7 @@ public class WebAppServlet extends HttpServlet {
         StringBuilder html = new StringBuilder();
         html.append("<h2>Risultati ricerca:</h2>\n");
         html.append("<table>\n");
-        html.append("<tr><th>Autore</th><th>Titolo</th><th>Editore</th><th>Anno</th><th>Operazione</th></tr>\n");
+        html.append("<tr><th>Autore</th><th>Titolo</th><th>Editore</th><th>Anno</th><th>Disponibilità</th><th>Operazione</th></tr>\n");
 
         if (results==null)
             return "";
@@ -127,9 +136,48 @@ public class WebAppServlet extends HttpServlet {
             html.append("<td>").append(libro.getTitolo()).append("</td>");
             html.append("<td>").append(libro.getEditore()).append("</td>");
             html.append("<td>").append(libro.getAnno()).append("</td>");
+            html.append("<td>").append(libro.getDisponibilita()).append("</td>");
             html.append("<td>").append("<div class='operation'>").append("<button onclick=\"window.location.href='")
                     .append(contextPath).append(servletContextPath).append("/chiediprestito?libro=").append(libro.getId())
                     .append("';\">Chiedi Prestito</a>").append("</div>").append("</td>");
+            html.append("</tr>\n");
+        }
+        html.append("</table>");
+        return html.toString();
+
+    }
+
+    private String genTableListResult(List<Libro> results, String contextPath, String servletContextPath)  {
+        if (results==null)
+            return "";
+        if (results.size()==0)
+            return "<h3>Nessun libro in biblioteca</h3>";
+        StringBuilder html = new StringBuilder();
+        html.append("<table>\n");
+        html.append("<tr><th>Autore</th><th>Titolo</th><th>Editore</th><th>Anno</th><th>Disponibilità</th><th>Operazione</th></tr>\n");
+
+        if (results==null)
+            return "";
+        for (Libro libro : results) {
+            html.append("<tr>");
+            html.append("<td>").append(libro.getAutore()).append("</td>");
+            html.append("<td>").append(libro.getTitolo()).append("</td>");
+            html.append("<td>").append(libro.getEditore()).append("</td>");
+            html.append("<td>").append(libro.getAnno()).append("</td>");
+            html.append("<td>").append(libro.getDisponibilita()).append("</td>");
+            html.append("<td>");
+            html.append("<div class='operation'>");
+            if (libro.getDisponibilita()>0)
+                       html.append("<button onclick=\"window.location.href='")
+                    .append(contextPath).append(servletContextPath).append("/chiediprestito?libro=").append(libro.getId())
+                    .append("';\">Chiedi Prestito</a>");
+            if (currentUser.getIsAdmin()) {
+                html.append("<button class='deletebutton' onclick=\"window.location.href='")
+                        .append(contextPath).append(servletContextPath).append("/cancellalibro?libro=").append(libro.getId())
+                        .append("';\">Cancella Libro</a>");
+            }
+            html.append("</div>");
+            html.append("</td>");
             html.append("</tr>\n");
         }
         html.append("</table>");
