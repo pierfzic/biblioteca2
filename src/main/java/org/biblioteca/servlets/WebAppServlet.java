@@ -68,21 +68,24 @@ public class WebAppServlet extends HttpServlet {
                 // L'utente non è loggato, reindirizza al login
                 response.sendRedirect("/biblioteca/web/login.html");
             }
-        // per evitare che tornando indietro risulti loggato
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-        response.setDateHeader("Expires", 0); // Proxies.
-        // -------------------
-        Map<String, String> mapParameters=new HashMap<>(); //mappa delle variabili template da sostituire
-        mapParameters.put("##username##",username);
-        mapParameters.put("##risultatiricerca##",genTableSearchResult(searchResults, contextPath, PATH_BACKEND_SERVLET));
-        mapParameters.put("##listalibri##", genTableListResult(books,contextPath, PATH_BACKEND_SERVLET));
-        mapParameters.put("##statusmsg##", (statusMsg!=null)? statusMsg: "" );
-        mapParameters.put("##hideloginmenu##", (hideloginmenu!=null)? hideloginmenu: "" );
-        if (currentUser!=null) {
-            List<Prestito> prestitiInSospesoUtente = currentUser.getListaPrestitiUtente().stream().filter(prestito -> (prestito.getRestituito() == null)).toList();
-            mapParameters.put("##borrowedbooks##", (prestitiInSospesoUtente != null)?genTableLoanResult(prestitiInSospesoUtente,contextPath, PATH_BACKEND_SERVLET):"");
-            mapParameters.put("##statusloanmsg##", (statusLoanMsg != null) ? statusLoanMsg : "");
+        Map<String, String> mapParameters= null; //mappa delle variabili template da sostituire
+        if (estensione.equals("html")) {
+            // per evitare che tornando indietro risulti loggato
+            response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+            response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+            response.setDateHeader("Expires", 0); // Proxies.
+            // -------------------
+            mapParameters = new HashMap<>();
+            mapParameters.put("##username##",username);
+            mapParameters.put("##risultatiricerca##",genTableSearchResult(searchResults, contextPath, PATH_BACKEND_SERVLET));
+            mapParameters.put("##listalibri##", genTableListResult(books,contextPath, PATH_BACKEND_SERVLET));
+            mapParameters.put("##statusmsg##", (statusMsg!=null)? statusMsg: "" );
+            mapParameters.put("##hideloginmenu##", (hideloginmenu!=null)? hideloginmenu: "" );
+            if (currentUser!=null) {
+                List<Prestito> prestitiInSospesoUtente = currentUser.getListaPrestitiUtente().stream().filter(prestito -> (prestito.getRestituito() == null)).toList();
+                mapParameters.put("##borrowedbooks##", (prestitiInSospesoUtente != null)?genTableLoanResult(prestitiInSospesoUtente,contextPath, PATH_BACKEND_SERVLET):"");
+                mapParameters.put("##statusloanmsg##", (statusLoanMsg != null) ? statusLoanMsg : "");
+            }
         }
 
         response.setContentType("text/"+estensione+";charset=UTF-8");
@@ -109,6 +112,8 @@ public class WebAppServlet extends HttpServlet {
         out.println(filteredPage);
 }
     public  String replaceStrings(String template, Map<String, String> replacements) {
+        if (replacements==null)
+            return template;
         String pageHTML=template;
         // Applica tutte le sostituzioni
         for (Map.Entry<String, String> replacement : replacements.entrySet()) {
