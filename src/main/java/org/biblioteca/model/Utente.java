@@ -294,9 +294,19 @@ public class Utente {
     }
 
     public boolean update(Connection conn) throws SQLException {
-        PreparedStatement pStatement = conn.prepareStatement("UPDATE UTENTE SET USERNAME=?, PASSWORD=? WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement pStatement = conn.prepareStatement("UPDATE UTENTE SET USERNAME=?, PASSWORD=?, IS_ADMIN=? WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
         pStatement.setString(1,this.getUsername());
         pStatement.setString(2,hashMD5(this.getPassword()));
+        pStatement.setBoolean(3, this.getIsAdmin());
+        pStatement.setInt(4, this.id);
+        int affectedRows = pStatement.executeUpdate();
+        pStatement.close();
+        return affectedRows != 0;
+    }
+    public boolean updatewoutPwd(Connection conn) throws SQLException {
+        PreparedStatement pStatement = conn.prepareStatement("UPDATE UTENTE SET USERNAME=?, IS_ADMIN=? WHERE ID=? ", Statement.RETURN_GENERATED_KEYS);
+        pStatement.setString(1,this.getUsername());
+        pStatement.setBoolean(2, this.getIsAdmin());
         pStatement.setInt(3, this.id);
         int affectedRows = pStatement.executeUpdate();
         pStatement.close();

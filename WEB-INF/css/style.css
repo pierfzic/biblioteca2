@@ -164,3 +164,59 @@ table tbody tr:nth-child(odd) {
     justify-content: flex-start; /* Allinea i pulsanti all'inizio del contenitore */
 }
 /* ------------------------ */
+
+/* stili checkbox admin */
+/* Stile generale per il contenitore */
+
+/* Nascondi l'input checkbox originale */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Creazione di una nuova checkbox personalizzata */
+.container .checkmark {
+    position: relative;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Al passaggio del mouse, cambia il colore della checkbox */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* Quando l'elemento è selezionato, cambia il colore della checkbox */
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+/* Creazione del segno di spunta all'interno della checkbox */
+.container .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Quando l'elemento è selezionato, mostra il segno di spunta */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Stile per il segno di spunta */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+/* ------------------- stili checkbox */

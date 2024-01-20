@@ -159,6 +159,37 @@ public class BackEndServlet  extends HttpServlet {
                 resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaUtenti.html");
             } else resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/userpage.html");
         }
+        if (requestUri.endsWith("/setAdmin")) {
+            if (currentUser.getIsAdmin()) {
+                Integer idUtente = Integer.parseInt(req.getParameter("utente"));
+                Utente daModificare=this.listaUtenti.stream().filter(utente -> utente.getId().equals(idUtente)).toList().get(0);
+                daModificare.setIsAdmin(true);
+                try {
+                    daModificare.update(connDb);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                session.setAttribute("statusMsg",  "Hai promosso " + daModificare.getUsername() + " ad amministratore");
+                resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaUtenti.html");
+                logger.logInfo(currentUser.getUsername()+" ha promosso "+daModificare.getUsername()+ " ad amministratore");
+            } else resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/userpage.html");
+        }
+        if (requestUri.endsWith("/unsetAdmin")) {
+            if (currentUser.getIsAdmin()) {
+                Integer idUtente = Integer.parseInt(req.getParameter("utente"));
+                Utente daModificare=this.listaUtenti.stream().filter(utente -> utente.getId().equals(idUtente)).toList().get(0);
+                daModificare.setIsAdmin(false);
+                try {
+                    daModificare.updatewoutPwd(connDb);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                session.setAttribute("statusMsg",  "Hai tolto i diritti di amministratore a " + daModificare.getUsername());
+                resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaUtenti.html");
+                logger.logInfo(currentUser.getUsername()+" ha tolto i diritti di amministratore a "+daModificare.getUsername());
+            } else resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/userpage.html");
+        }
+
     }
 
     @Override

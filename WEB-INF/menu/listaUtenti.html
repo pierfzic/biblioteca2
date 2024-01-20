@@ -7,6 +7,18 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu-style.css">
     <title>Lista Utenti Registrati</title>
+    <script>
+        function reindirizza(checkboxElement) {
+            var urlSet="/biblioteca/backend/setAdmin?utente=";
+            var urlUnset="/biblioteca/backend/unsetAdmin?utente=";
+            if (checkboxElement.checked) {
+                window.location.href = urlSet+checkboxElement.getAttribute('data-url');
+            }
+            else {window.location.href = urlUnset+checkboxElement.getAttribute('data-url');
+
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -36,7 +48,7 @@
             ##listautenti##
         </div>
         <br>
-        <div  id="statusbar" >
+        <div class="statusbar" id="statusbar" >
             ##statusmsg##
         </div>
 

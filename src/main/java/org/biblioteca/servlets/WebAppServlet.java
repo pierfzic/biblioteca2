@@ -133,7 +133,7 @@ public class WebAppServlet extends HttpServlet {
             return "<h3>Nessun risultato</h3>";
         StringBuilder html = new StringBuilder();
         html.append("<h2>Risultati ricerca:</h2>\n");
-        html.append("<table>\n");
+        html.append("<table class=\"table-search\">\n");
         html.append("<tr><th>Autore</th><th>Titolo</th><th>Editore</th><th>Anno</th><th>Disponibilità</th><th>Operazione</th></tr>\n");
 
         if (results==null)
@@ -161,7 +161,7 @@ public class WebAppServlet extends HttpServlet {
         if (results.size()==0)
             return "<h3>Nessun Utente</h3>";
         StringBuilder html = new StringBuilder();
-        html.append("<table>\n");
+        html.append("<table class=\"table-users\">\n");
         html.append("<tr><th>Id</th><th>Username</th><th>Amministratore</th><th>N. Libri in prestito</th><th>Operazione</th></tr>\n");
 
         if (results==null)
@@ -170,7 +170,10 @@ public class WebAppServlet extends HttpServlet {
             html.append("<tr>");
             html.append("<td>").append(utente.getId()).append("</td>");
             html.append("<td>").append(utente.getUsername()).append("</td>");
-            html.append("<td>").append(utente.getIsAdmin()).append("</td>");
+
+            html.append("<td>").append("<div class=\"check-admin\">" )
+                    .append("<label class=\"container\">")
+                    .append(getCheckboxAdmin(utente.getIsAdmin(),utente.getId())).append("</div>").append("</td>");
             html.append("<td>").append(utente.getListaPrestitiUtente().size()).append("</td>");
             html.append("<td>").append("<div class='operation'>").append("<button class='deletebutton' onclick=\"window.location.href='")
                     .append(contextPath).append(servletContextPath).append("/eliminaUtente?utente=").append(utente.getId())
@@ -188,7 +191,7 @@ public class WebAppServlet extends HttpServlet {
         if (results.size()==0)
             return "<h3>Nessun libro in biblioteca</h3>";
         StringBuilder html = new StringBuilder();
-        html.append("<table>\n");
+        html.append("<table class=\"table-books\">\n");
         html.append("<tr><th>Autore</th><th>Titolo</th><th>Editore</th><th>Anno</th><th>Disponibilità</th><th>Operazione</th></tr>\n");
 
         if (results==null)
@@ -223,7 +226,7 @@ public class WebAppServlet extends HttpServlet {
         if ((results==null) || (results.size()==0) )
             return "<h3>Nessun prestito</h3>";
         StringBuilder html = new StringBuilder();
-        html.append("<table>\n");
+        html.append("<table class=\"table-loans\">\n");
         html.append("<tr><th>Autore</th><th>Titolo</th><th>Editore</th><th>Anno</th><th>Scadenza</th><th>Operazione</th></tr>\n");
 
         if (results==null)
@@ -248,6 +251,19 @@ public class WebAppServlet extends HttpServlet {
         html.append("</table>");
         return html.toString();
 
+    }
+
+    private String getCheckboxAdmin(boolean value, int id) {
+        StringBuilder sb=new StringBuilder();
+        String checkValue=value?"checked": "";
+        sb.append("<input type=\"checkbox\" id=\"isAdmin\" name=\"isAdmin\" value=\"admin\" ")
+                .append(checkValue).append(" ")
+                .append("data-url=\"").append(id).append("\"").append(id).append("\" ")
+                .append(" onchange= ")
+                .append("\"reindirizza(this)\"")
+                .append(" >")
+                .append("<span class=\"checkmark\"></span></label>");
+        return sb.toString();
     }
     @Override
     public void destroy() {
