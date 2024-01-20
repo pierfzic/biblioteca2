@@ -11,6 +11,7 @@ import org.biblioteca.model.Libro;
 import org.biblioteca.model.Prestito;
 import org.biblioteca.model.Utente;
 import org.biblioteca.utils.ConfigLoader;
+import org.biblioteca.utils.CustomLogger;
 
 import javax.servlet.annotation.WebServlet;
 import java.io.BufferedReader;
@@ -28,12 +29,13 @@ import static org.biblioteca.Main.PATH_WEBAPP_SERVLET;
 @WebServlet(name = "BackEndServlet", urlPatterns = {PATH_BACKEND_SERVLET+"/*"}, loadOnStartup = 5)
 public class BackEndServlet  extends HttpServlet {
 
-    Utente currentUser;
-    Connection connDb;
-    ConfigLoader properties;
-    List<Libro> listaLibri;
-    List<Utente> listaUtenti;
-    List<Prestito> listaPrestiti;
+    private Utente currentUser;
+    private Connection connDb;
+    private ConfigLoader properties;
+    private List<Libro> listaLibri;
+    private List<Utente> listaUtenti;
+    private List<Prestito> listaPrestiti;
+    private final CustomLogger logger = CustomLogger.getInstance();
     @Override
     public void init() throws ServletException {
         ServletContext context = getServletContext();
@@ -73,6 +75,7 @@ public class BackEndServlet  extends HttpServlet {
                 resp.sendRedirect(contextPath + PATH_WEBAPP_SERVLET + "/menu/listaUtenti.html");
             }
         }
+
         if (requestUri.endsWith("/cercalibro")) {
             String srcAutore=req.getParameter("autore");
             String srcTitolo=req.getParameter("titolo");
@@ -132,25 +135,70 @@ public class BackEndServlet  extends HttpServlet {
         }
 
         if (requestUri.endsWith("/cancellalibro")) {
-            Integer idLibro = Integer.parseInt(req.getParameter("libro"));
-            Libro daCancellare=this.listaLibri.stream().filter(libro -> libro.getId().equals(idLibro)).toList().get(0);
-            boolean ok=currentUser.cancellaLibro(daCancellare);
-            session.setAttribute("statusMsg", ok? "Hai cancellato: " + daCancellare.getAutore() + " -" + daCancellare.getTitolo() :"");
-            resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaLibri.html");
+            if (currentUser.getIsAdmin()) {
+                Integer idLibro = Integer.parseInt(req.getParameter("libro"));
+                Libro daCancellare=this.listaLibri.stream().filter(libro -> libro.getId().equals(idLibro)).toList().get(0);
+                boolean ok=currentUser.cancellaLibro(daCancellare);
+                session.setAttribute("statusMsg", ok? "Hai cancellato: " + daCancellare.getAutore() + " -" + daCancellare.getTitolo() :"");
+                resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaLibri.html");
+            } else resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/userpage.html");
         }
         if (requestUri.endsWith("/eliminaUtente")) {
-            Integer idUtente = Integer.parseInt(req.getParameter("utente"));
-            Utente daCancellare=this.listaUtenti.stream().filter(utente -> utente.getId().equals(idUtente)).toList().get(0);
-            String deletedUsername=daCancellare.getUsername();
-            this.listaUtenti.remove(daCancellare);
-            boolean ok= false;
-            try {
-                ok = daCancellare.delete(connDb);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            if (currentUser.getIsAdmin()) {
+                Integer idUtente = Integer.parseInt(req.getParameter("utente"));
+                Utente daCancellare=this.listaUtenti.stream().filter(utente -> utente.getId().equals(idUtente)).toList().get(0);
+                String deletedUsername=daCancellare.getUsername();
+                this.listaUtenti.remove(daCancellare);
+                boolean ok= false;
+                try {
+                    ok = daCancellare.delete(connDb);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                session.setAttribute("statusMsg", ok? "Hai cancellato l'utente : ID=" + daCancellare.getId()+ " - " + daCancellare.getUsername() :"");
+                resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaUtenti.html");
+            } else resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/userpage.html");
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        try {
+            this.currentUser= (Utente) session.getAttribute("currentUser");
+        } catch (NullPointerException npe) {
+
+        }
+        ServletContext context = getServletContext();
+        this.listaUtenti= (List<Utente>) context.getAttribute("users");
+        this.connDb = (Connection) context.getAttribute("connectionDb");
+        this.listaLibri= (List<Libro>) context.getAttribute("books");
+        this.listaPrestiti= (List<Prestito>) context.getAttribute("loans" );
+
+        String contextPath = req.getContextPath();
+        String requestUri = req.getRequestURI();
+        resp.setContentType("text/html");
+
+        if (requestUri.endsWith("/cambiaPassword")) {
+            if (currentUser!=null) {
+                List<Utente> listautenti = (List<Utente>) context.getAttribute("users");
+                String vecchiaPassword=req.getParameter("oldpassword");
+                String nuovaPassWord=req.getParameter("newpassword");
+                boolean ok= false;
+                try {
+                    ok = currentUser.cambiaPassword(this.connDb, vecchiaPassword,nuovaPassWord);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                if (ok) {
+                    logger.logInfo("utente "+this.currentUser.getUsername()+" ha cambiato password con successo");
+                    resp.sendRedirect(contextPath + PATH_WEBAPP_SERVLET + "chgpwdOK.html");
+                }
+                else {
+                    logger.logWarning("fallimento nel cambio password dell'utente "+this.currentUser.getUsername());
+                    resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"chgpwdfailed.html");
+                }
             }
-            session.setAttribute("statusMsg", ok? "Hai cancellato l'utente : ID=" + daCancellare.getId()+ " - " + daCancellare.getUsername() :"");
-            resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaUtenti.html");
         }
     }
 

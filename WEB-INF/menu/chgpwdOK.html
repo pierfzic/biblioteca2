@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu-style.css">
-    <title>Lista Utenti Registrati</title>
+    <title>Cambia Password</title>
 </head>
-
 <body>
 <div class="sidebar">
 
@@ -20,28 +18,17 @@
         <li><a href="listaLibri.html">Lista Libri</a></li>
         <li><a href="restituzioneLibro.html">Situazione Prestiti</a></li>
         <li><a href="ricerca.html">Ricerca Libro nel Catalogo</a></li>
-        <li><a href="../registration/registrazioneUtente.html">Registrazione nuovi utenti</a></li>
+        <li><a href="registrazioneUtente.html">Registrazione nuovi utenti</a></li>
         <div ##onlyforadmin##>
-        <li><a href="listaUtenti.html">Lista utenti</a></li>
+            <li><a href="listaUtenti.html">Lista utenti</a></li>
         </div>
         <li><a href="cambiaPassword.html">Cambia Password</a></li>
         <li><a href="../insertbook/inserimentoLibro.html">Inserimento nuovo libro</a></li>
-        <li><a href="../login/entrance/logout">Logout</a></li>
+        <li><a href="entrance/logout">Logout</a></li>
     </ul>
 </div>
-
-    <div class="lista-libri-container">
-        <h2>Utenti Registrati</h2>
-        <div class="risultati-ricerca">
-            ##listautenti##
-        </div>
-        <br>
-        <div  id="statusbar" >
-            ##statusmsg##
-        </div>
-
-    </div>
-
+<div class="risposta-container">
+    <h2>Cambio password avvenuto con successo</h2>
+</div>
 </body>
-
 </html>

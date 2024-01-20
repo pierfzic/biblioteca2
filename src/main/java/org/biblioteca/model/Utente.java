@@ -344,5 +344,26 @@ public class Utente {
         return result;
     }
 
+    public boolean cambiaPassword(Connection connDb, String oldPassword, String newPassword) throws SQLException {
+        String hashOldPassword=hashMD5(oldPassword);
+        String hashNewPassword=hashMD5(newPassword);
+        PreparedStatement pStatement = connDb.prepareStatement("SELECT PASSWORD FROM UTENTE WHERE ID=?", Statement.RETURN_GENERATED_KEYS);
+        pStatement.setInt(1, this.getId());
+        ResultSet rsUsers = pStatement.executeQuery();
+        String hashedPasswordFromDb = null;
+        boolean abilitato=false;
+        if (rsUsers.next()) {
+            hashedPasswordFromDb=rsUsers.getString("PASSWORD");
+            abilitato = hashOldPassword.equals(hashedPasswordFromDb);
+        }
+        boolean okpersist=false;
+        if (abilitato) {
+            this.setPassword(newPassword);
+            okpersist=this.update(connDb);
+        }
+
+        return okpersist;
+    }
+
 
 }
