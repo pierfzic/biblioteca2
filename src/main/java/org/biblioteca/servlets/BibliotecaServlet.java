@@ -157,6 +157,18 @@ public class BibliotecaServlet extends HttpServlet {
                 resp.getWriter().println("");
             }
         }
+        if (requestUri.endsWith("/libroInPrestito")) {
+            Integer idLibro = Integer.parseInt(req.getParameter("libro"));
+            Libro libro = this.listaLibri.stream().filter(libro1 -> (libro1.getId().equals(idLibro))).toList().get(0);
+            List<Prestito> prestati=this.listaPrestiti.stream().filter(prestito -> (prestito.getLibro().getId().equals(idLibro) && (prestito.getRestituito()==null) ) ).toList();
+            String jsonString = null;
+            if ((prestati==null) || (prestati.size()==0))
+                jsonString="false";
+            else jsonString="true";
+                resp.setStatus(HttpServletResponse.SC_OK);
+                resp.getWriter().println(jsonString);
+
+        }
 
         if (requestUri.endsWith("/cancellalibro")) {
             Integer idLibro = Integer.parseInt(req.getParameter("libro"));
@@ -222,6 +234,7 @@ public class BibliotecaServlet extends HttpServlet {
                 resp.getWriter().println("");
             }
         }
+
         if (requestUri.endsWith("/listaprestitiutente")) {
             Integer idUtente = Integer.parseInt(req.getParameter("utente"));
             Utente utente = this.listaUtenti.stream().filter(utente1 -> (utente1.getId().equals(idUtente))).toList().get(0);
