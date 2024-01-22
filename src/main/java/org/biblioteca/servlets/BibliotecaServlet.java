@@ -289,7 +289,7 @@ public class BibliotecaServlet extends HttpServlet {
             Utente user = new Utente(rsUsers.getInt("ID"), rsUsers.getString("USERNAME"), rsUsers.getString("PASSWORD"));
             user.setIsAdmin(rsUsers.getBoolean("IS_ADMIN"));
             this.listaUtenti.add(user);
-            logger.logInfo("Aggiungo utente " + rsUsers.getString("username") + " " + (rsUsers.getBoolean("IS_ADMIN") ? "E' AMMINISTRATORE" : "UTENTE NORMALE"));
+
         }
         logger.logInfo("Inizializzo la lista di libri");
         this.listaLibri = new ArrayList<Libro>();
@@ -299,7 +299,7 @@ public class BibliotecaServlet extends HttpServlet {
                     rs.getString("EDITORE"), rs.getInt("ANNO"));
             libro.setDisponibilita(rs.getInt("DISPONIBILITA"));
             this.listaLibri.add(libro);
-            logger.logInfo("Aggiungo nella biblioteca il libro " + rs.getString("titolo"));
+
 
         }
         logger.logInfo("Inizializzo la lista di prestiti");
@@ -314,7 +314,6 @@ public class BibliotecaServlet extends HttpServlet {
             prestito.setNotificato(rsLoans.getBoolean("NOTIFICATO"));
             prestito.setNotificare(rsLoans.getBoolean("NOTIFICARE"));
             this.listaPrestiti.add(prestito);
-            logger.logInfo("Aggiungo prestito " + rsLoans.getString("ID"));
         }
 
         logger.logInfo("SERVLET AVVIATA!");
@@ -346,14 +345,13 @@ public class BibliotecaServlet extends HttpServlet {
 
     public Prestito prestito(Utente user, Libro librodaPrestare) {
         Libro libro = this.listaLibri.stream().filter(libro1 -> libro1.getId().equals(librodaPrestare.getId())).toList().get(0);
-        logger.logInfo("[DEBUG] Utente " + user.getUsername() + " cerca di prendere in prestito il libro " + libro.getTitolo());
+        logger.logInfo("Utente " + user.getUsername() + " prende in prestito il libro " + libro.getTitolo());
         if (libro.getDisponibilita() < 1) {
-            logger.logInfo("[ERRORE] Libro " + libro.toString() + " non disponibile ");
+            logger.logWarning("Libro " + libro.toString() + " non disponibile ");
             return null;
         }
         Prestito p = new Prestito(0, user, libro, LocalDate.now().plusDays(GIORNI_PRESTITO));
         p.setRestituito(null);
-        logger.logInfo("[DEBUG] scadenza prestito " + p.getScadenza().toString());
         Integer disponibile = libro.getDisponibilita();
         libro.setDisponibilita(--disponibile);
         try {
@@ -377,7 +375,7 @@ public class BibliotecaServlet extends HttpServlet {
             return  null;
         Libro libro = p.getLibro();
         Utente user = p.getUser();
-        logger.logInfo("[DEBUG] l'utente " + user.getUsername() + " tenta la restituzione del libro " + libro.getTitolo());
+        logger.logInfo("Utente " + user.getUsername() + " restituisce il libro " + libro.getTitolo());
 
         if ((p != null) && (p.getRestituito()==null)) {
             p.setRestituito(LocalDate.now());
@@ -393,7 +391,7 @@ public class BibliotecaServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-            logger.logInfo("[DEBUG] restituzione del libro " + libro.getTitolo() + " riuscita!");
+            logger.logInfo("Restituzione del libro " + libro.getTitolo() + " riuscita!");
             return p;
         }
         return p;
@@ -408,7 +406,7 @@ public class BibliotecaServlet extends HttpServlet {
         Libro libro = p.getLibro();
         Utente user = p.getUser();
         if ((p != null) && (p.getRestituito()==null)) {
-            logger.logInfo("[DEBUG] utente " + user.getUsername() + " tenta proroga del prestito del libro " + libro.getTitolo());
+            logger.logInfo("Utente " + user.getUsername() + " proroga  prestito del libro " + libro.getTitolo());
             p.setScadenza(p.getScadenza().plusDays(PERIODO_PROROGA));
             try {
                 p.update(connDb);
@@ -417,7 +415,7 @@ public class BibliotecaServlet extends HttpServlet {
             }
             return p;
         } else {
-            logger.logInfo("[ERRORE] Utente " + user.getUsername() + " non può prorogare il prestito del libro " + libro.getTitolo());
+            logger.logInfo("Utente " + user.getUsername() + " non può prorogare il prestito del libro " + libro.getTitolo());
             return null;
         }
     }

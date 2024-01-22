@@ -131,6 +131,7 @@ public class BackEndServlet  extends HttpServlet {
             Libro libro = prestito.getLibro();
             boolean ok = currentUser.prolungaPrestito(prestito);
             session.setAttribute("statusLoanMsg", ok? "Hai prorogato: " + libro.getAutore() + " -" + libro.getTitolo() :"");
+            logger.logInfo(currentUser.getUsername()+" ha prorograto il prestito del libro "+libro.getAutore()+" - "+libro.getTitolo());
             resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/restituzionelibro.html");
         }
 
@@ -141,6 +142,7 @@ public class BackEndServlet  extends HttpServlet {
                 boolean ok=currentUser.cancellaLibro(daCancellare);
                 session.setAttribute("statusMsg", ok? "Hai cancellato: " + daCancellare.getAutore() + " -" + daCancellare.getTitolo() :"");
                 resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaLibri.html");
+                logger.logInfo(this.currentUser+" ha cancellato il libro "+daCancellare.getAutore()+" - "+daCancellare.getTitolo());
             } else resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/userpage.html");
         }
         if (requestUri.endsWith("/eliminaUtente")) {
@@ -157,6 +159,7 @@ public class BackEndServlet  extends HttpServlet {
                 }
                 session.setAttribute("statusMsg", ok? "Hai cancellato l'utente : ID=" + daCancellare.getId()+ " - " + daCancellare.getUsername() :"");
                 resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/listaUtenti.html");
+                logger.logInfo(this.currentUser+" ha eliminato l'utente "+daCancellare.getUsername());
             } else resp.sendRedirect(contextPath+PATH_WEBAPP_SERVLET+"/menu/userpage.html");
         }
         if (requestUri.endsWith("/setAdmin")) {
