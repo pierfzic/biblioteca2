@@ -828,15 +828,15 @@
 2024-01-22T20:16:59.354527500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
 2024-01-22T20:16:59.365537700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
 2024-01-22T20:17:30.746535600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : admin non può cancellare il libro  Umberto Eco - Il nome della Rosa perché è in prestito 
-2024-01-26T15:57:08.229708700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
-2024-01-26T15:57:08.442957300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
-2024-01-26T15:57:08.462540+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
-2024-01-26T15:57:08.467540100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
-2024-01-26T15:57:08.477539500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
-2024-01-26T16:31:30.115717100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
-2024-01-26T16:32:12.673280800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
-2024-01-26T16:32:34.700021100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
-2024-01-26T16:32:34.816645700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
-2024-01-26T16:32:34.825644500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
-2024-01-26T16:32:34.829644200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
-2024-01-26T16:32:34.836641900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-26T20:37:45.851176700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-26T20:37:45.964176+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-26T20:37:45.972172100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-26T20:37:45.974172700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-26T20:37:45.980174800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-26T20:37:56.417677500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-26T20:39:19.347196500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-26T20:39:19.462196400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-26T20:39:19.469195200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-26T20:39:19.473195+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-26T20:39:19.480196600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-26T20:39:29.905299500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!

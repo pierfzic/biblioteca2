@@ -6,12 +6,13 @@ import org.biblioteca.utils.TaskNotificheScadenza;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
+import org.eclipse.jetty.webapp.WebAppContext;
 
 import java.util.Timer;
 
 public class Main {
     public static final String PATH_APP="/biblioteca";
-    public static final String PATH_WEBAPP_SERVLET="/WEB-INF";
+    public static final String PATH_WEBAPP_SERVLET="/src/main/webapp";
     public static final String PATH_SERVICES_SERVLET="/services";
     public static final String PATH_BACKEND_SERVLET="/backend";
     public static final String PATH_REGISTER_SERVLET="/register";
@@ -30,6 +31,8 @@ public class Main {
         org.eclipse.jetty.server.Server server = new org.eclipse.jetty.server.Server(servertPort);
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath(PATH_APP);
+
+
         context.setBaseResource(Resource.newClassPathResource(PATH_WEBAPP_SERVLET));
         server.setHandler(context);
 
