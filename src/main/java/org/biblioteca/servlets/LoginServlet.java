@@ -9,7 +9,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.biblioteca.model.Utente;
 import org.biblioteca.utils.CustomLogger;
-import org.h2.tools.Server;
 import org.biblioteca.utils.ConfigLoader;
 import java.io.*;
 import java.net.*;
