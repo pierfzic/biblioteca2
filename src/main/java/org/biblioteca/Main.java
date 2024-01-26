@@ -25,7 +25,10 @@ public class Main {
     public static final String PATH_INSERTBOOK_SERVLET="/insertbook";
     public static final String PATH_LOGIN_SERVLET=PATH_WEBAPP_SERVLET+"/login";
 
+    private static ConfigLoader properties;
+
     public static void main(String[] args) throws Exception {
+        properties = new ConfigLoader("config.properties");
         final CustomLogger LOGGER = CustomLogger.getInstance();
         ConfigLoader properties = new ConfigLoader("config.properties");
         int servertPort=Integer.parseInt(properties.getProperty("server.port"));
@@ -53,8 +56,10 @@ public class Main {
         TaskNotificheScadenza task = new TaskNotificheScadenza();
 
         // Esegue il task ogni 24 ore
+        Integer firstDelay=Integer.parseInt(properties.getProperty("delay.prima.notifica"));
+        Integer period=Integer.parseInt(properties.getProperty("periodo.notifiche.successive"));
         Integer ogniGiorno=86400000;//24*60*60*1000;
-        timer.schedule(task, 200000, ogniGiorno);
+        timer.schedule(task, firstDelay, period);
 
 
    }
