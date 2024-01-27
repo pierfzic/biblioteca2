@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.biblioteca.model.Utente;
 import org.biblioteca.utils.CustomLogger;
+import org.h2.tools.Server;
 import org.biblioteca.utils.ConfigLoader;
 import java.io.*;
 import java.net.*;
@@ -119,7 +120,7 @@ public class LoginServlet extends HttpServlet {
         StringBuffer sb=new StringBuffer();
         Utente currentUser = null;
         PrintWriter out = response.getWriter();
-        String path = requestUri.substring(contextPath.length());
+        String path = requestUri.substring(contextPath.length()+1);
         String pathCartella=path.substring(request.getServletPath().length());
         String pagina = path.substring(path.lastIndexOf('/') + 1);
         String estensione = pagina.substring(pagina.lastIndexOf('.') + 1);
@@ -136,7 +137,8 @@ public class LoginServlet extends HttpServlet {
         if (request.getParameter("username")==null) {
             response.setContentType("text/"+estensione+";charset=UTF-8");
             session.setAttribute("firstLogin", Boolean.TRUE);
-            try (BufferedReader reader = new BufferedReader(new FileReader("."+path))) {
+            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(path);
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);

@@ -828,15 +828,173 @@
 2024-01-22T20:16:59.354527500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
 2024-01-22T20:16:59.365537700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
 2024-01-22T20:17:30.746535600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : admin non può cancellare il libro  Umberto Eco - Il nome della Rosa perché è in prestito 
-2024-01-26T20:37:45.851176700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
-2024-01-26T20:37:45.964176+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
-2024-01-26T20:37:45.972172100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
-2024-01-26T20:37:45.974172700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
-2024-01-26T20:37:45.980174800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
-2024-01-26T20:37:56.417677500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
-2024-01-26T20:39:19.347196500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
-2024-01-26T20:39:19.462196400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
-2024-01-26T20:39:19.469195200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
-2024-01-26T20:39:19.473195+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
-2024-01-26T20:39:19.480196600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
-2024-01-26T20:39:29.905299500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T13:32:37.840790800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T13:32:38.035791500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T13:32:38.051799500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T13:32:38.056790300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T13:32:38.069792100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T13:32:48.691049600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T13:34:05.648497800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T13:34:05.790497200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T13:34:05.802497700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T13:34:05.806515900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T13:34:05.815496900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T13:37:23.543592700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T13:37:23.670593700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T13:37:23.682596300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T13:37:23.686593400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T13:37:23.694594500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T13:37:41.235930500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T13:39:54.611132500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T13:39:54.769130700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T13:39:54.785130800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T13:39:54.789134400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T13:39:54.799131600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T13:44:10.199296200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T13:44:10.338294400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T13:44:10.349293500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T13:44:10.352296+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T13:44:10.360295100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T13:44:24.896331400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file /webapp/ciao.html
+2024-01-27T13:44:31.434994300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T13:46:32.269671500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file /webapp/ciao.html
+2024-01-27T13:47:00.270245500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T13:47:00.401223+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T13:47:00.411220500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T13:47:00.415220900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T13:47:00.422219100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T13:49:38.129491+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file /webapp/ciao.html
+2024-01-27T13:50:08.544252600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T13:50:08.686256500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T13:50:08.697251400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T13:50:08.700252900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T13:50:08.708253500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T13:50:19.212321200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T13:52:46.912878500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file /webapp/ciao.html
+2024-01-27T13:58:13.962638400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T13:58:14.094639600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T13:58:14.106638800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T13:58:14.110642500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T13:58:14.116639+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:01:02.980102100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file /webapp/menu/userpage.html
+2024-01-27T14:04:15.526144700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T14:04:15.653144300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T14:04:15.662144+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T14:04:15.665146200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T14:04:15.671143500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:05:02.094744700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file /webapp/menu/userpage.html
+2024-01-27T14:05:07.314410100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T14:07:02.647955800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file /webapp/menu/userpage.html
+2024-01-27T14:08:46.657179100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T14:08:46.801189400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T14:08:46.812175+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T14:08:46.815174600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T14:08:46.820174500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:09:26.807622600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:09:27.619539+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T14:09:32.012511600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:09:32.446633700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:10:19.900438200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/login.login.html
+2024-01-27T14:13:38.081128800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T14:13:38.209128900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T14:13:38.219130400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T14:13:38.222127600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T14:13:38.229127200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:14:30.581059+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T14:14:35.678751100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:16:45.598857+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T14:16:45.733856100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T14:16:45.744857+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T14:16:45.746857800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T14:16:45.752856100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:16:55.973350100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:16:56.213349200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T14:17:56.110046+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:17:59.435578300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:17:59.437583200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:18:17.840969300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T14:18:17.955971600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T14:18:17.962970+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T14:18:17.965969600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T14:18:17.969969700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:18:22.161539+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/listaLibri.html
+2024-01-27T14:18:22.201505800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:18:22.201505800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:18:25.892772500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:18:25.925780300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:18:25.925780300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:18:27.509920600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:18:27.529876500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:18:27.529876500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:18:28.162435900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T14:18:28.432705800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/listaLibri.html
+2024-01-27T14:18:28.451695400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:18:28.452674200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:18:33.595722300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Utente piero779@gmail.com prende in prestito il libro Tre uomini in barca
+2024-01-27T14:18:33.653167300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:18:33.673588800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:18:33.674589300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:18:36.192381600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/restituzioneLibro.html
+2024-01-27T14:18:36.217383500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:18:36.220384700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:18:39.454264800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Utente piero779@gmail.com restituisce il libro Tre uomini in barca
+2024-01-27T14:18:39.459259400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Restituzione del libro Tre uomini in barca riuscita!
+2024-01-27T14:18:39.517198200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/restituzionelibro.html
+2024-01-27T14:18:39.541186500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:18:39.547168400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:18:43.164945500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/ricerca.html
+2024-01-27T14:18:43.196947400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:18:43.197949400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:20:36.900077900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T14:20:37.008076200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T14:20:37.014077500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T14:20:37.017076+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T14:20:37.022111700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:20:43.981982+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/ricerca.html
+2024-01-27T14:20:47.463665800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T14:20:49.135315600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:20:49.169318500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:20:49.172317500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:20:57.896477800+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:04.293272+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:21:04.325272700+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:04.327279500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:21:07.081038100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/listaUtenti.html
+2024-01-27T14:21:07.109025600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:07.111013300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:21:08.736127300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/insertbook/inserimentoLibro.html
+2024-01-27T14:21:08.764148+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:08.764148+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:21:09.803443300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/cambiaPassword.html
+2024-01-27T14:21:09.825440200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:09.829442200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:21:11.095904600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/ricerca.html
+2024-01-27T14:21:11.121885200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:11.121885200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:21:14.442813600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/listaLibri.html
+2024-01-27T14:21:14.464789900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:14.464789900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:21:16.699021+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:28.820725100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T14:21:28.944721600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T14:21:28.955728300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T14:21:28.958723400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T14:21:28.963723100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:21:47.684928500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:47.916744500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T14:21:50.952295+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:21:50.985298600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:21:50.989299900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:23:22.025705900+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Server H2 avviato e in ascolto sulla porta 9094
+2024-01-27T14:23:22.212702500+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di utenti
+2024-01-27T14:23:22.232704400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di libri
+2024-01-27T14:23:22.236706600+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Inizializzo la lista di prestiti
+2024-01-27T14:23:22.245712100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : SERVLET AVVIATA!
+2024-01-27T14:23:32.691026300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : Notifiche eseguite!
+2024-01-27T14:23:32.905688400+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:23:32.946686+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:23:32.946686+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:24:06.859909300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/menu/userpage.html
+2024-01-27T14:24:06.886917300+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css
+2024-01-27T14:24:06.888914100+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/menu-style.css
+2024-01-27T14:24:11.580470200+01:00[Europe/Rome] INFO : org.biblioteca.utils.CustomLogger : WebAppServlet: sto servendo il file webapp/css/style.css

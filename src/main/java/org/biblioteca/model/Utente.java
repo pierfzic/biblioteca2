@@ -145,7 +145,7 @@ public class Utente {
             throw new RuntimeException(e);
         }
         List<Libro> result= Collections.emptyList();
-        if (!response.equals(""))
+        if (!response.equals("") && !response.equals("\r\n"))
             result = mapper.readValue(response, new TypeReference<List<Libro>>() {});
         return result;
 

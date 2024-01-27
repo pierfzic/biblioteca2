@@ -4,10 +4,12 @@ import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpSession;
+import org.biblioteca.Main;
 import org.biblioteca.model.Libro;
 import org.biblioteca.model.Prestito;
 import org.biblioteca.model.Utente;
 import org.biblioteca.utils.ConfigLoader;
+import org.biblioteca.utils.CustomLogger;
 
 import java.io.*;
 import java.util.HashMap;
@@ -24,6 +26,8 @@ public class WebAppServlet extends HttpServlet {
 
     private ConfigLoader properties;
     private Utente currentUser;
+
+    private final CustomLogger logger = CustomLogger.getInstance();
 
     @Override
     public void init() throws ServletException {
@@ -48,7 +52,7 @@ public class WebAppServlet extends HttpServlet {
             username = this.currentUser.getUsername();
         }
         String uri = request.getRequestURI();
-        String path = uri.substring(contextPath.length());
+        String path = uri.substring(contextPath.length()+1);
         // Estrae la parte finale dell'URI per ottenere il nome della pagina
         String pagina = path.substring(path.lastIndexOf('/') + 1);
         String estensione = pagina.substring(pagina.lastIndexOf('.') + 1);
@@ -76,6 +80,7 @@ public class WebAppServlet extends HttpServlet {
             response.setHeader("Pragma", "no-cache"); // HTTP 1.0
             response.setDateHeader("Expires", 0); // Proxies.
             // -------------------
+            if (currentUser!=null) {
             mapParameters = new HashMap<>();
             mapParameters.put("##username##",username);
             mapParameters.put("##risultatiricerca##",genTableSearchResult(searchResults, contextPath, PATH_BACKEND_SERVLET));
@@ -83,17 +88,21 @@ public class WebAppServlet extends HttpServlet {
             mapParameters.put("##statusmsg##", (statusMsg!=null)? statusMsg: "" );
             mapParameters.put("##hideloginmenu##", (hideloginmenu!=null)? hideloginmenu: "" );
             mapParameters.put("##listautenti##", genTableUserResult(users,contextPath, PATH_BACKEND_SERVLET));
-            if (currentUser!=null) {
-                List<Prestito> prestitiInSospesoUtente = currentUser.getListaPrestitiUtente().stream().filter(prestito -> (prestito.getRestituito() == null)).toList();
-                mapParameters.put("##borrowedbooks##", (prestitiInSospesoUtente != null)?genTableLoanResult(prestitiInSospesoUtente,contextPath, PATH_BACKEND_SERVLET):"");
-                mapParameters.put("##statusloanmsg##", (statusLoanMsg != null) ? statusLoanMsg : "");
-                mapParameters.put("##onlyforadmin##", this.currentUser.getIsAdmin()? " style=\"display: block;\"": "style=\"display: none;\"");
+
+            List<Prestito> prestitiInSospesoUtente = currentUser.getListaPrestitiUtente().stream().filter(prestito -> (prestito.getRestituito() == null)).toList();
+            mapParameters.put("##borrowedbooks##", (prestitiInSospesoUtente != null)?genTableLoanResult(prestitiInSospesoUtente,contextPath, PATH_BACKEND_SERVLET):"");
+            mapParameters.put("##statusloanmsg##", (statusLoanMsg != null) ? statusLoanMsg : "");
+            mapParameters.put("##onlyforadmin##", this.currentUser.getIsAdmin()? " style=\"display: block;\"": "style=\"display: none;\"");
             }
         }
 
         response.setContentType("text/"+estensione+";charset=UTF-8");
             // Leggi e restituisci il file HTML
-            try (BufferedReader reader = new BufferedReader(new FileReader("."+path))) {
+
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream(path);
+        System.out.println("Sto servendo il file "+path);
+        logger.logInfo("WebAppServlet: sto servendo il file "+path);
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     sb.append(line);
